@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="fr" ng-app="Woda">
+<head>
+  <meta charset="utf-8">
+  <title>Woda</title>
+
+  <script src="vendor/angular/angular.js"></script>
+  <script src="vendor/angular/angular-route.js"></script>
+  <script src="vendor/angular/angular-resource.js"></script>
+  <script src="vendor/angular/angular-cookies.js"></script>
+
+  <script src="app/src/Woda.js"></script>
+  <script src="app/src/UserModule/UserModule.js"></script>
+  <script src="app/src/UserModule/Controller/SecurityController.js"></script>
+  <script src="app/src/UserModule/Controller/AccountController.js"></script>
+  <script src="app/src/UserModule/Service/UserRequest.js"></script>
+  <script src="app/src/UserModule/Service/Authentification.js"></script>
+  <script src="app/src/UserModule/Service/User.js"></script>
+
+</head>
+<body>
+
+  <div>
+    Hello this is Wodangular
+
+
+    <div ng-view></div>
+  </div>
+  
+</body>
+</html>
