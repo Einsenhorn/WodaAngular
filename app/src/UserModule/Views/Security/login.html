@@ -1,0 +1,14 @@
+<div>
+
+	<form id="login" ng-submit="login(user, password)">
+		<input type="text" placeholder="Your username here" ng-model="user" autofocus>
+		<input type="password" ng-model="password">
+		<input type="submit" value="Sign in">
+	</form>
+
+	<div ng-show="errorMessage.length != 0" class="error">{{errorMessage}}</div>
+
+</div>
+<div>
+	<a ng-href="#/register">Sign up !</a>
+</div>

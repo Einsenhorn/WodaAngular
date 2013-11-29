@@ -1,0 +1,21 @@
+<h2>Account settings</h2>
+
+<div>
+	<h3>Update informations</h3>
+	<div>
+		<form id="update" ng-submit="update(email, password)">
+			<input type="text" placeholder="Your email" ng-model="email" autofocus>
+			<input type="password" placeholder="Change your password" ng-model="password">
+			<input type="submit" value="Validate">
+		</form>
+
+		<div ng-show="errorMessage.length != 0" class="error">{{errorMessage}}</div>
+		<div ng-show="successMessage.length != 0" class="error">{{successMessage}}</div>
+	</div>
+</div>
+
+<div>
+	<h3>Delete Account</h3>
+	<span>Are you sure ?! <i ng-click="delete()">Yes</i></span>
+
+</div>
