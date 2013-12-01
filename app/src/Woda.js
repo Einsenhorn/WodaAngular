@@ -57,17 +57,24 @@ config(function($routeProvider) {
 constant('ServiceURL', 'http://kobhqlt.fr:3000').
 constant('version', '0.1')
 .run(['$location', '$rootScope', '$route', 'User', function($location, $rootScope, $route, User) {
+
+  var isValidRoute = function(route) {
+    return route.hasOwnProperty("$$route") && route.$$route.hasOwnProperty("_access_");
+  };
+
   var isAnonAccessAllowed = function(route) {
-    return (route.$$route &&
-      typeof route.$$route._access_ != "undefined" &&
-      typeof route.$$route._access_._anonAllowed_ != "undefined" &&
-      route.$$route._access_._anonAllowed_);
-  },  isUserAccessAllowed = function(route) {
-    return (route.$$route &&
-      typeof route.$$route._access_ != "undefined" &&
-      typeof route.$$route._access_._userAllowed_ != "undefined" &&
-      route.$$route._access_._userAllowed_);
-  },  checkRoute = function() {
+    return (isValidRoute(route)
+            && route.$$route._access_.hasOwnProperty("_anonAllowed_")
+            && route.$$route._access_._anonAllowed_);
+  };
+  
+  var isUserAccessAllowed = function(route) {
+    return (isValidRoute(route)
+            && route.$$route._access_.hasOwnProperty("_userAllowed_")
+            && route.$$route._access_._userAllowed_);
+  };
+
+  var checkRoute = function() {
     $rootScope.$on("$routeChangeStart", function(event, next, current) {
       if (User.isLogged()) {
         if (!isUserAccessAllowed(next)) {
@@ -79,7 +86,7 @@ constant('version', '0.1')
         }
       }
     });
-  }
+  };
 
   User.r.read(function (data) {
       console.log('User already connected');
