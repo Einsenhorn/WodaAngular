@@ -1,5 +1,5 @@
 angular.module('UserModule').factory('User', ['$resource', 'ServiceURL', function($resource, ServiceURL) {
-	var headers = { 'Content-Type': 'application/x-www-form-urlencoded' };
+	var headers = { 'Content-Type': 'application/json' };
 
 	return {
 		data: {},
@@ -7,10 +7,6 @@ angular.module('UserModule').factory('User', ['$resource', 'ServiceURL', functio
 			login: {
 				url: ServiceURL + '/users/:user/login',
 				method:'POST',
-				params: {
-					user: '@user',
-					password: '@password'
-				},
 				withCredentials: true,
 				headers: headers
 			}, logout: {
@@ -27,24 +23,14 @@ angular.module('UserModule').factory('User', ['$resource', 'ServiceURL', functio
 				url: ServiceURL + '/users',
 				method: 'POST',
 				withCredentials: true,
-				params: {
-					password: '@password',
-					email: '@email'
-				},
 				headers: headers
 			}, create: {
 				url: ServiceURL + '/users/:user',
 				method: 'PUT',
 				withCredentials: true,
-				params: {
-					password: '@password',
-					email: '@email'
-				},
 				headers: {
-					'Content-Type': 'application/x-www-form-urlencoded',
+					'Content-Type': 'application/json',
 					'X-Requested-With': '',
-					//'Access-Control-Request-Headers': 'X-Custom-Header'
-					//'Connection': 'keep-alive'
 				}
 			}, delete: {
 				url: ServiceURL + '/users',
