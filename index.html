@@ -1,30 +1,39 @@
 <!doctype html>
 <html lang="fr" ng-app="Woda">
-<head>
-  <meta charset="utf-8">
-  <title>Woda</title>
+    <head>
+        <meta charset="utf-8">
+        <title>Woda</title>
 
-  <script src="vendor/angular/angular.js"></script>
-  <script src="vendor/angular/angular-route.js"></script>
-  <script src="vendor/angular/angular-resource.js"></script>
-  <script src="vendor/angular/angular-cookies.js"></script>
+        <script src="vendor/digest.min.js"></script>
 
-  <script src="app/src/Woda.js"></script>
-  <script src="app/src/UserModule/UserModule.js"></script>
-  <script src="app/src/UserModule/Controller/AccountController.js"></script>
-  <script src="app/src/UserModule/Directive/Logout.js"></script>
-  <script src="app/src/UserModule/Service/User.js"></script>
+        <script src="vendor/angular/angular.js"></script>
+        <script src="vendor/angular/angular-route.js"></script>
+        <script src="vendor/angular/angular-resource.js"></script>
+        <script src="vendor/angular/angular-cookies.js"></script>
 
-</head>
-<body>
+        <script src="app/src/Configuration/Services/Parameters.js"></script>
+        <script src="app/src/Configuration/Module.js"></script>
 
-  <div>
-    <h1>
-      <a ng-href="#/">WodAngular</a>
-    </h1>
+        <script src="app/src/File/Services/Transfer.js"></script>
+        <script src="app/src/File/Module.js"></script>
 
-    <div ng-view></div>
-  </div>
-  
-</body>
+        <script src="app/src/User/Controllers/AccountController.js"></script>
+        <script src="app/src/User/Directives/Logout.js"></script>
+        <script src="app/src/User/Services/User.js"></script>
+        <script src="app/src/User/Module.js"></script>
+
+        <script src="app/src/Woda.js"></script>
+
+    </head>
+    <body>
+
+        <div>
+            <h1>
+                <a ng-href="#/">WodAngular</a>
+            </h1>
+
+            <div ng-view></div>
+        </div>
+
+    </body>
 </html>
