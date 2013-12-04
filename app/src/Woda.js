@@ -33,10 +33,14 @@ angular.module('Woda', [
     };
 })
 .controller('uploadTest', function($scope, WodaFileTransfer) {
+    $scope.foolol = WodaFileTransfer.download( 94 );
     $scope.$watch( 'foo', function ( ) {
         WodaFileTransfer.upload( $scope.foo );
     } );
 })
+.config( ['$compileProvider', function($compileProvider){
+  $compileProvider.imgSrcSanitizationWhitelist(/^\s*(blob):/);
+}])
 .config(function($routeProvider) {
     $routeProvider.
       when('/login', {
