@@ -1,6 +1,6 @@
-angular.module( 'woda.file.transfer', [ 'woda.configuration' ] )
+angular.module( 'FileModule' )
 
-    .factory( 'WodaFileTransfer', function ( $q, $http, $rootScope, WodaParameters ) {
+    .factory( 'FileTransfer', function ( $q, $http, $rootScope, ServiceURL ) {
 
         function bin2hex( buffer ) {
 
@@ -22,7 +22,7 @@ angular.module( 'woda.file.transfer', [ 'woda.configuration' ] )
                     var data = fileReader.result;
                     var hash = bin2hex( new Digest.SHA256( ).digest( data ) );
 
-                    $http.put( WodaParameters.host + '/sync', {
+                    $http.put( ServiceURL + '/sync', {
                         filename : file.name,
                         content_hash : hash,
                         size : data.byteLength.toString( )
@@ -36,7 +36,7 @@ angular.module( 'woda.file.transfer', [ 'woda.configuration' ] )
                         if ( ! data.need_upload ) return ;
                         data.needed_parts.forEach( function ( requestedPart ) {
                             var begin = requestedPart * data.part_size, end = begin + data.part_size;
-                            $http.put( WodaParameters.host + '/sync/' + data.file.id + '/' + requestedPart, file.slice( begin, end ), {
+                            $http.put( ServiceURL + '/sync/' + data.file.id + '/' + requestedPart, file.slice( begin, end ), {
                                 withCredentials : true,
 		                headers: {
 			            'Content-Type': 'application/octet-stream',
@@ -59,7 +59,7 @@ angular.module( 'woda.file.transfer', [ 'woda.configuration' ] )
                 var file = {
                     parts : [ ], blob : null, url : null };
 
-                $http.get( WodaParameters.host + '/files/' + id, {
+                $http.get( ServiceURL + '/files/' + id, {
                     withCredentials : true
                 } ).success( function ( data ) {
 
@@ -68,7 +68,7 @@ angular.module( 'woda.file.transfer', [ 'woda.configuration' ] )
 
                     $q.all( file.parts.map( function ( part ) {
 
-                        return $http.get( WodaParameters.host + '/sync/' + id + '/' + part.index, {
+                        return $http.get( ServiceURL + '/sync/' + id + '/' + part.index, {
                             withCredentials : true,
                             responseType : 'arraybuffer'
                         } ).success( function ( data ) {

@@ -11,7 +11,8 @@
  */
 angular.module('Woda', [
   'ngRoute',
-  'UserModule'
+  'UserModule',
+  'FileModule'
 ]).
 config(function($routeProvider) {
 
@@ -57,6 +58,12 @@ config(function($routeProvider) {
 }).
 constant('ServiceURL', 'http://kobhqlt.fr:3000').
 constant('version', '0.1')
+.config(['$compileProvider', function($compileProvider) {
+  $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|file|blob):|data:image\//);
+}])
+.controller( 'Test', function ( $scope, FileTransfer ) {
+    $scope.foo = FileTransfer.download( 94 );
+} )
 .run(['$location', '$rootScope', '$route', 'User', function($location, $rootScope, $route, User) {
 
   var isValidRoute = function(route) {
