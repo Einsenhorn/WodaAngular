@@ -74,7 +74,7 @@ angular.module('Woda', [
 .controller( 'Test', function ( $scope, FileTransfer ) {
   $scope.foo = FileTransfer.download( 94 );
 })
-.run(['$location', '$rootScope', '$route', 'User', 'FSystem' , function($location, $rootScope, $route, User, FSystem) {
+.run(['$q', '$location', '$rootScope', '$route', 'User', 'FSystem' , function($q, $location, $rootScope, $route, User, FSystem) {
   $rootScope.title = 'Woda';
 
   var isValidRoute = function(route) {
