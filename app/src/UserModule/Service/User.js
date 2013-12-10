@@ -1,39 +1,36 @@
-angular.module('UserModule').factory('User', ['$resource', 'ServiceURL', function($resource, ServiceURL) {
+angular.module('UserModule').factory('User', ['$resource', 'WodaConfiguration', function($resource, WodaConfiguration) {
 	var headers = { 'Content-Type': 'application/json' };
 
 	return {
 		data: {},
-		r: $resource(ServiceURL + '/users', {}, {
+		r: $resource(WodaConfiguration.host + '/users', {}, {
 			login: {
-				url: ServiceURL + '/users/:user/login',
+				url: WodaConfiguration.host + '/users/:user/login',
 				method:'POST',
 				withCredentials: true,
 				headers: headers
 			}, logout: {
-				url: ServiceURL + '/users/logout',
+				url: WodaConfiguration.host + '/users/logout',
 				method:'GET',
 				withCredentials: true,
 				headers: headers
 			}, read: {
-				url: ServiceURL + '/users',
+				url: WodaConfiguration.host + '/users',
 				method:'GET',
 				withCredentials: true,
 				headers: headers
 			}, update: {
-				url: ServiceURL + '/users',
+				url: WodaConfiguration.host + '/users',
 				method: 'POST',
 				withCredentials: true,
 				headers: headers
 			}, create: {
-				url: ServiceURL + '/users/:user',
+				url: WodaConfiguration.host + '/users/:user',
 				method: 'PUT',
 				withCredentials: true,
-				headers: {
-					'Content-Type': 'application/json',
-					'X-Requested-With': '',
-				}
+				headers: headers
 			}, delete: {
-				url: ServiceURL + '/users',
+				url: WodaConfiguration.host + '/users',
 				method: 'DELETE',
 				withCredentials: true,
 				headers: headers

@@ -2,17 +2,23 @@
 <html lang="fr" ng-app="Woda">
 <head>
   <meta charset="utf-8">
-  <title>Woda</title>
+  <title>{{title}}</title>
 
-  <script src="vendor/angular/digest.min.js"></script>
+  <script src="vendor/digest.min.js"></script>
   <script src="vendor/angular/angular.js"></script>
   <script src="vendor/angular/angular-route.js"></script>
   <script src="vendor/angular/angular-resource.js"></script>
   <script src="vendor/angular/angular-cookies.js"></script>
 
   <script src="app/src/Woda.js"></script>
+  <script src="app/src/WodaConfiguration.js"></script>
+
   <script src="app/src/FileModule/FileModule.js"></script>
+  <script src="app/src/FileModule/Controller/ListController.js"></script>
+  <script src="app/src/FileModule/Directive/Breadcrumb.js"></script>
+  <script src="app/src/FileModule/Service/FSytem.js"></script>
   <script src="app/src/FileModule/Service/Transfer.js"></script>
+
   <script src="app/src/UserModule/UserModule.js"></script>
   <script src="app/src/UserModule/Controller/AccountController.js"></script>
   <script src="app/src/UserModule/Directive/Logout.js"></script>

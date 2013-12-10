@@ -4,7 +4,31 @@
 	<div ng-include="'app/src/UserModule/Views/Account/menu.html'"></div>
 </div>
 
-{{user}}
+<div>
+	<div fsystem-breadcrumb>
+		ici
+	</div>
+	Root: "{{root.name}}"<br />
+	<table ng-show="!error">
+		<thead>
+			<tr>
+			    <th>Files</th>
+			    <th>Modified</th>
+		    </tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="folder in root.folders">
+				<th><pre><a ng-href="#/{{folder.id}}">{{folder.name}}</a></pre></th>
+				<th><pre>{{folder.last_update | date: 'short'}}</pre></th>
+			</tr>
+			<tr ng-repeat="file in root.files">
+				<th>{{file.name}}</th>
+				<th><pre>{{file.last_update | date: 'short'}}</pre></th>
+			</tr>
+ 		</tbody>
+	</table>
+	<div ng-show="error" class="error" style="border: 1px solid #F0F">{{error}}</div>
+</div>
 
 <div ng-controller="Test">
     <img ng-src="{{ foo.url }}" />

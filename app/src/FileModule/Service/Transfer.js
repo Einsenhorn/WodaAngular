@@ -1,6 +1,6 @@
 angular.module( 'FileModule' )
 
-    .factory( 'FileTransfer', function ( $q, $http, $rootScope, ServiceURL ) {
+    .factory( 'FileTransfer', function ( $q, $http, $rootScope, WodaConfiguration ) {
 
         function bin2hex( buffer ) {
 
@@ -22,7 +22,7 @@ angular.module( 'FileModule' )
                     var data = fileReader.result;
                     var hash = bin2hex( new Digest.SHA256( ).digest( data ) );
 
-                    $http.put( ServiceURL + '/sync', {
+                    $http.put( WodaConfiguration.host + '/sync', {
                         filename : file.name,
                         content_hash : hash,
                         size : data.byteLength.toString( )
@@ -36,7 +36,7 @@ angular.module( 'FileModule' )
                         if ( ! data.need_upload ) return ;
                         data.needed_parts.forEach( function ( requestedPart ) {
                             var begin = requestedPart * data.part_size, end = begin + data.part_size;
-                            $http.put( ServiceURL + '/sync/' + data.file.id + '/' + requestedPart, file.slice( begin, end ), {
+                            $http.put( WodaConfiguration.host + '/sync/' + data.file.id + '/' + requestedPart, file.slice( begin, end ), {
                                 withCredentials : true,
 		                headers: {
 			            'Content-Type': 'application/octet-stream',
@@ -59,7 +59,7 @@ angular.module( 'FileModule' )
                 var file = {
                     parts : [ ], blob : null, url : null };
 
-                $http.get( ServiceURL + '/files/' + id, {
+                $http.get( WodaConfiguration.host + '/files/' + id, {
                     withCredentials : true
                 } ).success( function ( data ) {
 
@@ -68,7 +68,7 @@ angular.module( 'FileModule' )
 
                     $q.all( file.parts.map( function ( part ) {
 
-                        return $http.get( ServiceURL + '/sync/' + id + '/' + part.index, {
+                        return $http.get( WodaConfiguration.host + '/sync/' + id + '/' + part.index, {
                             withCredentials : true,
                             responseType : 'arraybuffer'
                         } ).success( function ( data ) {

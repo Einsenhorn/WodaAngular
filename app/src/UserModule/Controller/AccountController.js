@@ -1,10 +1,11 @@
-angular.module('UserModule').controller('AccountController', ['$scope', '$rootScope', '$location', 'User', function($scope, $rootScope, $location, User) {
+angular.module('UserModule').controller('AccountController', ['$scope', '$rootScope', '$location', 'User', 'FSystem', function($scope, $rootScope, $location, User, FSystem) {
+	$rootScope.title = 'Woda';
 	$scope.User = User.data;
 	$scope.errorMessage = "";
 
 	/* --- */
-	$scope.user = 'louis';
-	$scope.password = 'azerty';
+	$scope.user = 'mael';
+	$scope.password = 'azerty42';
 	/* --- */
 
 	$scope.register = function(user, email, password) {
@@ -15,7 +16,7 @@ angular.module('UserModule').controller('AccountController', ['$scope', '$rootSc
 				User.data = data.user;
 				$location.path('/');
 			}, function(httpResponse) {
-				console.debug('Error during registring')
+				console.debug('Error during registering')
 				if (httpResponse.status == 400) {
 					$scope.errorMessage = httpResponse.data.message;
 				}
@@ -52,6 +53,7 @@ angular.module('UserModule').controller('AccountController', ['$scope', '$rootSc
 		User.r.login({ user: user }, { password: password }, function(data) {
 				console.log('User logged');
 				User.data = data.user;
+
 				$location.path("/");
 			}, function (httpResponse) {
 				if (httpResponse.status == 400) {

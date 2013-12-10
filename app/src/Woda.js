@@ -4,17 +4,18 @@
  * Route Access
  * _access_: {
  *  _anonAllowed: true|false [dft -> false]
- *  _userAllowed: true|false [fft -> true]
+ *  _userAllowed: true|false [dft -> true]
  * }
  * [-----------]
  *
  */
 angular.module('Woda', [
   'ngRoute',
+
   'UserModule',
-  'FileModule'
-]).
-config(function($routeProvider) {
+  'FileModule',
+])
+.config(function($routeProvider) {
 
     $routeProvider.
       when('/login', {
@@ -49,22 +50,32 @@ config(function($routeProvider) {
           _userAllowed_: true
         }
       }).
+      when('/:FSystemId', {
+        templateUrl: 'app/src/FileModule/Views/list.html',
+        controller: 'ListController',
+        _access_: {
+          _userAllowed_: true
+        }
+      }).
       when('/', {
         templateUrl: 'app/src/FileModule/Views/list.html',
+        controller: 'ListController',
+        _access_: {
+          _userAllowed_: true
+        }
       }).
       otherwise({
         redirectTo: '/'
       });
-}).
-constant('ServiceURL', 'http://kobhqlt.fr:3000').
-constant('version', '0.1')
+})
 .config(['$compileProvider', function($compileProvider) {
   $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|file|blob):|data:image\//);
 }])
 .controller( 'Test', function ( $scope, FileTransfer ) {
-    $scope.foo = FileTransfer.download( 94 );
-} )
-.run(['$location', '$rootScope', '$route', 'User', function($location, $rootScope, $route, User) {
+  $scope.foo = FileTransfer.download( 94 );
+})
+.run(['$location', '$rootScope', '$route', 'User', 'FSystem' , function($location, $rootScope, $route, User, FSystem) {
+  $rootScope.title = 'Woda';
 
   var isValidRoute = function(route) {
     return route.hasOwnProperty("$$route") && route.$$route.hasOwnProperty("_access_");
@@ -100,12 +111,14 @@ constant('version', '0.1')
       console.log('User already connected');
       User.data = data.user;
       checkRoute();
+
       if (!isUserAccessAllowed($route.current)) {
         $location.path("/");
       }
     }, function(data) {
       console.log('User not connected yet');
       checkRoute();
+
       if (!isAnonAccessAllowed($route.current)) {
         $location.path("/login");
       }

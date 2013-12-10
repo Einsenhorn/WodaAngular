@@ -1,4 +1,3 @@
 angular.module('UserModule', [
-		'ngResource'
-	]
-);
+	'ngResource'
+]);
