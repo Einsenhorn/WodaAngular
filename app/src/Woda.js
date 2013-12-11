@@ -71,10 +71,32 @@ angular.module('Woda', [
 .config(['$compileProvider', function($compileProvider) {
   $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|file|blob):|data:image\//);
 }])
-.controller( 'Test', function ( $scope, FileTransfer ) {
-  $scope.foo = FileTransfer.download( 94 );
+/*  */
+.directive('file', function() {
+     return {
+        restrict: 'E',
+         template: '<input type="file" />',
+         replace: true,
+         require: 'ngModel',
+         link: function(scope, element, attr, ctrl) {
+             var listener = function() {
+                 scope.$apply(function() {
+                     attr.multiple ? ctrl.$setViewValue(element[0].files) : ctrl.$setViewValue(element[0].files[0]);
+                 });
+             };
+             element.bind('change', listener);
+         }
+     };
 })
-.run(['$q', '$location', '$rootScope', '$route', 'User', 'FSystem' , function($q, $location, $rootScope, $route, User, FSystem) {
+.controller('uploadTest', function($scope, FileTransfer) {
+  $scope.foo2 = FileTransfer.download( 36 );
+
+  $scope.$watch( 'foo', function ( ) {
+     FileTransfer.upload( $scope.foo );
+  } );
+})
+/*  */
+.run(['$location', '$rootScope', '$route', 'User', 'FSystem' , function($location, $rootScope, $route, User, FSystem) {
   $rootScope.title = 'Woda';
 
   var isValidRoute = function(route) {

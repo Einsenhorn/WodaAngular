@@ -8,7 +8,31 @@ angular.module('FileModule').factory('FSystem', ['$resource', 'WodaConfiguration
 				method:'GET',
 				withCredentials: true,
 				headers: headers
-			}
+			},
+			public: {
+				url: WodaConfiguration.host + '/files/public/:FSystemId',
+				method:'POST',
+				withCredentials: true,
+				headers: headers
+			},
+			favorite: {
+				url: WodaConfiguration.host + '/files/favorites/:FSystemId',
+				method:'POST',
+				withCredentials: true,
+				headers: headers
+			},
+			delete: {
+				url: WodaConfiguration.host + '/sync/:FSystemId',
+				method:'DELETE',
+				withCredentials: true,
+				headers: headers
+			},
+			createFolder: {
+				url: WodaConfiguration.host + '/create_folder',
+				method:'POST',
+				withCredentials: true,
+				headers: headers
+			},
 		})
 	};
 }]);
