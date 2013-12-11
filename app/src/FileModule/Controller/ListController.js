@@ -48,4 +48,11 @@ angular.module('FileModule').controller('ListController', ['$scope', '$rootScope
 			$scope.root.folders.push(data.folder);
 		})
 	}
+
+	$scope.getDDL = function(fsystem) {
+		FSystem.r.getDDL({ FSystemId: fsystem.id }, function(data) {
+			console.debug(data.link);
+			alert(data.link);
+		});
+	}
 }]);

@@ -33,6 +33,12 @@ angular.module('FileModule').factory('FSystem', ['$resource', 'WodaConfiguration
 				withCredentials: true,
 				headers: headers
 			},
+			getDDL: {
+				url: WodaConfiguration.host + '/files/link/:FSystemId',
+				method:'GET',
+				withCredentials: true,
+				headers: headers
+			},
 		})
 	};
 }]);
