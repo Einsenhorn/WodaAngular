@@ -33,15 +33,15 @@
 		<tbody>
 			<tr ng-repeat="folder in root.folders">
 				<th><pre><a ng-href="#/{{folder.id}}">{{folder.name}}</a></pre></th>
-				<th><pre style="color:#F0F">{{folder.public | Checkmark }}</pre></th>
-				<th><pre style="color:#F0F">{{folder.favorite | Checkmark }}</pre></th>
+				<th><pre style="color:#F0F" ng-click="publicFSystem(folder)">{{folder.public | Checkmark }}</pre></th>
+				<th><pre style="color:#F0F" ng-click="favoriteFSystem(folder)">{{folder.favorite | Checkmark }}</pre></th>
 				<th><pre ng-click="deleteFSystem(folder)">delete</pre></th>
 				<th><pre>{{folder.last_update | date: 'short'}}</pre></th>
 			</tr>
 			<tr ng-repeat="file in root.files">
 				<th>{{file.name}}</th>
-				<th><pre style="color:#F0F" ng-click="publicFile(file)">{{file.public | Checkmark }}</pre></th>
-				<th><pre style="color:#F0F" ng-click="favoriteFile(file)">{{file.favorite | Checkmark }}</pre></th>
+				<th><pre style="color:#F0F" ng-click="publicFSystem(file)">{{file.public | Checkmark }}</pre></th>
+				<th><pre style="color:#F0F" ng-click="favoriteFSystem(file)">{{file.favorite | Checkmark }}</pre></th>
 				<th><pre ng-click="deleteFSystem(file)">delete</pre></th>
 				<th><pre>{{file.last_update | date: 'short'}}</pre></th>
 			</tr>
