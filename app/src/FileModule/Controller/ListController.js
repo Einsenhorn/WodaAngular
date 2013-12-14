@@ -1,4 +1,4 @@
-angular.module('FileModule').controller('ListController', ['$scope', '$rootScope', '$routeParams', 'FSystem', function($scope, $rootScope, $routeParams, FSystem) {
+angular.module('FileModule').controller('ListController', ['$scope', '$rootScope', '$routeParams', '$location', 'FSystem', function($scope, $rootScope, $routeParams, $location, FSystem) {
 	var FSystemId = $routeParams.hasOwnProperty("FSystemId") ? $routeParams.FSystemId : 0;
 
 	$scope.root = {};
@@ -51,8 +51,9 @@ angular.module('FileModule').controller('ListController', ['$scope', '$rootScope
 
 	$scope.getDDL = function(fsystem) {
 		FSystem.r.getDDL({ FSystemId: fsystem.id }, function(data) {
+			window.location = data.link;
 			console.debug(data.link);
-			alert(data.link);
+			//alert(data.link);
 		});
 	}
 }]);
