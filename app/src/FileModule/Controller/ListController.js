@@ -2,10 +2,15 @@ angular.module('FileModule').controller('ListController', ['$scope', '$rootScope
 	var FSystemId = $routeParams.hasOwnProperty("FSystemId") ? $routeParams.FSystemId : 0;
 
 	$scope.root = {};
+	$scope.breadcrumb = '';
 
-	FSystem.r.get({ FSystemId: FSystemId ? FSystemId : '' }, function(data, httpResponse) {
+	FSystem.r.get({ FSystemId: FSystemId ? FSystemId : '' }, function(data) {
 			$scope.root = data.hasOwnProperty("folder") ? data.folder : data.file;
 			$rootScope.title = $scope.root.name;
+			FSystem.r.breadcrumb({ FSystemId: FSystemId }, function(data) {
+				console.debug(FSystemId, data);
+				//$scope.breadcrumb = data.breadcrumb
+			});
 		}, function(httpResponse) {
 			if (httpResponse.status == 400) {
 				$scope.error = httpResponse.data.message;

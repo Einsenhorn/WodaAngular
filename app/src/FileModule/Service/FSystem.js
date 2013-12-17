@@ -6,6 +6,7 @@ angular.module('FileModule').factory('FSystem', ['$resource', 'WodaConfiguration
 			get: {
 				url: WodaConfiguration.host + '/files/:FSystemId',
 				method:'GET',
+				params: { depth: 0 },
 				withCredentials: true,
 				headers: headers
 			},
@@ -39,6 +40,12 @@ angular.module('FileModule').factory('FSystem', ['$resource', 'WodaConfiguration
 				withCredentials: true,
 				headers: headers
 			},
+			breadcrumb: {
+				url: WodaConfiguration.host + '/files/breadcrumb/:FSystemId',
+				method:'GET',
+				withCredentials: true,
+				headers: headers
+			}
 		})
 	};
 }]);
