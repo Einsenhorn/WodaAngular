@@ -20,6 +20,10 @@
   <script src="app/src/FileModule/Service/FSystem.js"></script>
   <!-- <script src="app/src/FileModule/Service/Transfer.js"></script> -->
 
+  <script src="app/src/LayoutModule/LayoutModule.js"></script>
+  <script src="app/src/LayoutModule/Controller/HeaderController.js"></script>
+
+
   <script src="app/src/SearchModule/SearchModule.js"></script>
   <script src="app/src/SearchModule/Controller/SearchController.js"></script>
   <script src="app/src/SearchModule/Service/Search.js"></script>
@@ -32,11 +36,18 @@
 <body>
 
   <div>
-    <h1>
-      <a ng-href="#/">WodAngular</a>
-    </h1>
-
+    <div>
+      <div style="font-size:40px;">
+        <a ng-href="#/">Woda</a>
+      </div>
+    </div>
+    <div ng-controller="HeaderController">
+      <div ng-include="'app/src/LayoutModule/Views/Header.html'"></div>
+    </div>
+|* -- -- *|
     <div ng-view></div>
+|* -- -- *|
+
   </div>
 
 </body>

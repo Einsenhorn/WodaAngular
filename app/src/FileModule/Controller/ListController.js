@@ -1,16 +1,14 @@
 angular.module('FileModule').controller('ListController', ['$scope', '$rootScope', '$routeParams', '$location', 'FSystem', function($scope, $rootScope, $routeParams, $location, FSystem) {
-	var FSystemId = $routeParams.hasOwnProperty("FSystemId") ? $routeParams.FSystemId : 0;
-
 	$scope.root = {};
-	$scope.breadcrumb = '';
 
-	FSystem.r.get({ FSystemId: FSystemId ? FSystemId : '' }, function(data) {
-			$scope.root = data.hasOwnProperty("folder") ? data.folder : data.file;
+	FSystem.r.get({ FSystemId: $routeParams.hasOwnProperty("FSystemId") ? $routeParams.FSystemId : '' }, function(data) {
+			if (!data.hasOwnProperty("folder")) {
+				$location.path('/');
+				return ;
+			}
+
+			$scope.root = data.folder;
 			$rootScope.title = $scope.root.name;
-			FSystem.r.breadcrumb({ FSystemId: FSystemId }, function(data) {
-				console.debug(FSystemId, data);
-				//$scope.breadcrumb = data.breadcrumb
-			});
 		}, function(httpResponse) {
 			if (httpResponse.status == 400) {
 				$scope.error = httpResponse.data.message;
@@ -30,9 +28,9 @@ angular.module('FileModule').controller('ListController', ['$scope', '$rootScope
 	$scope.favoriteFSystem = function(fsystem) {
 		FSystem.r.favorite({ FSystemId: fsystem.id }, { favorite: !fsystem.favorite }, function(data) {
 			if (fsystem.hasOwnProperty("folder") && fsystem.folder === true) {
-				$scope.root.folders[$scope.root.folders.indexOf(fsystem)] = data.file;	
+				$scope.root.folders[$scope.root.folders.indexOf(fsystem)] = data.file;
 			} else {
-				$scope.root.files[$scope.root.files.indexOf(fsystem)] = data.file;	
+				$scope.root.files[$scope.root.files.indexOf(fsystem)] = data.file;
 			}
 		});
 	}

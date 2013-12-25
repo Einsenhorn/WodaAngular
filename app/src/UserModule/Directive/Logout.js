@@ -2,7 +2,7 @@ angular.module('UserModule').directive('userLogout', ['$location', 'User', funct
 	return {
 		link: function(scope, element, attrs) {
 			element.bind("click", function() {
-				User.r.logout({}, function(data) {
+				User.r.logout(function(data) {
 					User.data = {};
 					$location.path("/login");				
 				});

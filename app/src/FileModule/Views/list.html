@@ -1,28 +1,7 @@
-<div>Files list</div>
+<h2>Files list</h2>
 
-<div ng-controller="AccountController">
-	<div ng-include="'app/src/UserModule/Views/Account/menu.html'"></div>
-</div>
-
-<div ng-controller="SearchController">
-	<div ng-include="'app/src/SearchModule/Views/form.html'"></div>
-</div>
-
-<!--
-<div ng-controller="uploadTest">
-	<div><file ng-model="foo"></file></div>
-	<img src="{{ foo2.url }}" />
-</div>
--->
 <div>
-	<div fsystem-breadcrumb>
-		breadcrumb:
-	</div>
-	<div>
-		<form ng-submit="createFolder(foldername)">
-			<input type="text" style="text-align:center" placeholder="folder's name" ng-model="foldername">
-		</form>
-	</div>
+	<div ng-if="root.id" fsystem-breadcrumb></div>
 
 	Root: "{{root.name}}"<br />
 	<table border="1" ng-show="!error">
@@ -55,5 +34,12 @@
 			</tr>
  		</tbody>
 	</table>
+
 	<div ng-show="error" class="error" style="border: 1px solid #F0F">{{error}}</div>
+
+	<div>
+		<form ng-submit="createFolder(foldername)">
+			Add new folder: <input type="text" style="text-align:center" placeholder="folder's name" ng-model="foldername">
+		</form>
+	</div>
 </div>

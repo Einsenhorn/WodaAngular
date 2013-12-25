@@ -1,0 +1,13 @@
+<div>
+	<ul>
+		<li ng-click="filter='private'">private files: {{resultPrivateFilesCount}}</li>
+		<li ng-click="filter='public'">public files: {{resultPublicFilesCount}}</li>
+		<li ng-click="filter='user'">users: {{resultUserCount}}</li>
+	</ul>
+
+<pre ng-show="filter == 'private'">{{resultPrivateFiles}}</pre>
+<br />
+<pre ng-show="filter == 'public'">{{resultPublicFiles}}</pre>
+<br />
+<pre ng-show="filter == 'user'">{{resultUser}}</pre>
+</div>
