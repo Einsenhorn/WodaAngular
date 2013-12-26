@@ -1,7 +1,7 @@
 angular.module('FileModule').controller('ListController', ['$scope', '$rootScope', '$routeParams', '$location', 'FSystem', function($scope, $rootScope, $routeParams, $location, FSystem) {
 	$scope.root = {};
 
-	FSystem.r.get({ FSystemId: $routeParams.hasOwnProperty("FSystemId") ? $routeParams.FSystemId : '' }, function(data) {
+	FSystem.r.getList({ FSystemId: $routeParams.hasOwnProperty("FSystemId") ? $routeParams.FSystemId : '' }, function(data) {
 			if (!data.hasOwnProperty("folder")) {
 				$location.path('/');
 				return ;
@@ -13,7 +13,8 @@ angular.module('FileModule').controller('ListController', ['$scope', '$rootScope
 			if (httpResponse.status == 400) {
 				$scope.error = httpResponse.data.message;
 			}
-	});
+		}
+	);
 
 	$scope.publicFSystem = function(fsystem) {
 		FSystem.r.public({ FSystemId: fsystem.id }, { public: !fsystem.public }, function(data) {

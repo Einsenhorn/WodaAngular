@@ -94,7 +94,7 @@ angular.module('Woda', [
       },
       resolve: resolve
     }).
-    when("/:FSystemId", {
+    when("/", {
       templateUrl: "app/src/FileModule/Views/list.html",
       controller: "ListController",
       _access_: {
@@ -102,9 +102,44 @@ angular.module('Woda', [
       },
       resolve: resolve
     }).
-    when("/", {
+    when("/list", {
+      redirectTo: "/"
+    }).
+    when("/list/:FSystemId", {
       templateUrl: "app/src/FileModule/Views/list.html",
       controller: "ListController",
+      _access_: {
+        _userAllowed_: true
+      },
+      resolve: resolve
+    }).
+    when("/recent", {
+      templateUrl: "app/src/FileModule/Views/recent.html",
+      controller: "RecentController",
+      _access_: {
+        _userAllowed_: true
+      },
+      resolve: resolve
+    }).
+    when("/favorite", {
+      templateUrl: "app/src/FileModule/Views/favorite.html",
+      controller: "FavoriteController",
+      _access_: {
+        _userAllowed_: true
+      },
+      resolve: resolve
+    }).
+    when("/public", {
+      templateUrl: "app/src/FileModule/Views/public.html",
+      controller: "PublicController",
+      _access_: {
+        _userAllowed_: true
+      },
+      resolve: resolve
+    }).
+    when("/downloaded", {
+      templateUrl: "app/src/FileModule/Views/downloaded.html",
+      controller: "DownloadedController",
       _access_: {
         _userAllowed_: true
       },

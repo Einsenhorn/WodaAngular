@@ -1,6 +1,6 @@
 angular.module('FileModule').directive('fsystemBreadcrumb', ['$routeParams', 'FSystem', function($routeParams, FSystem) {
 	return {
-		template: '<div><ul class="breadcrumb"></ul></div>',
+		template: '<div>FILE: <ul class="breadcrumb"></ul></div>',
 		replace: true,
 		controller: function($scope, $element) {
 			var ul = $element.children()[0];

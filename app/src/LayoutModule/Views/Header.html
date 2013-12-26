@@ -1,9 +1,23 @@
 <div ng-show="User">
-	<div ng-controller="AccountController">
-	  <div ng-include="'app/src/UserModule/Views/Account/menu.html'"></div>
+	<div>
+		<div ng-controller="AccountController">
+		  <div ng-include="'app/src/UserModule/Views/Account/menu.html'"></div>
+		</div>
 	</div>
 
-	<div ng-controller="SearchController">
-	  <div ng-include="'app/src/SearchModule/Views/form.html'"></div>
+	<div>
+		<div ng-controller="SearchController">
+		  <div ng-include="'app/src/SearchModule/Views/form.html'"></div>
+		</div>
 	</div>
+
+	<div>
+		<ul>
+			<li><a ng-href="#/">Files</a></li>
+			<li><a ng-href="#/recent">Recent</a></li>
+			<li><a ng-href="#/favorite">Favorite</a></li>
+			<li><a ng-href="#/public">Public</a></li>
+			<li><a ng-href="#/downloaded">Downloaded</a></li>
+			<li><a ng-href="#/friends">Friends</a></li>
+		</ul>
 </div>

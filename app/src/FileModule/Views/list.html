@@ -4,38 +4,7 @@
 	<div ng-if="root.id" fsystem-breadcrumb></div>
 
 	Root: "{{root.name}}"<br />
-	<table border="1" ng-show="!error">
-		<thead>
-			<tr>
-			    <th>Files</th>
-			    <th>public</th>
-			    <th>favorite</th>
-			    <th>delete</th>
-			    <th>Direct Donwload Link</th>
-			    <th>Modified</th>
-		    </tr>
-		</thead>
-		<tbody>
-			<tr ng-repeat="folder in root.folders">
-				<th><pre><a ng-href="#/{{folder.id}}">{{folder.name}}</a></pre></th>
-				<th><pre style="color:#F0F" ng-click="publicFSystem(folder)">{{folder.public | Checkmark }}</pre></th>
-				<th><pre style="color:#F0F" ng-click="favoriteFSystem(folder)">{{folder.favorite | Checkmark }}</pre></th>
-				<th><pre ng-click="deleteFSystem(folder)">delete</pre></th>
-				<th><pre ng-click="getDDL(folder)">DDL</pre></th>
-				<th><pre>{{folder.last_update | date: 'short'}}</pre></th>
-			</tr>
-			<tr ng-repeat="file in root.files">
-				<th>{{file.name}}</th>
-				<th><pre style="color:#F0F" ng-click="publicFSystem(file)">{{file.public | Checkmark }}</pre></th>
-				<th><pre style="color:#F0F" ng-click="favoriteFSystem(file)">{{file.favorite | Checkmark }}</pre></th>
-				<th><pre ng-click="deleteFSystem(file)">delete</pre></th>
-				<th><pre ng-click="getDDL(file)">DDL</pre></th>
-				<th><pre>{{file.last_update | date: 'short'}}</pre></th>
-			</tr>
- 		</tbody>
-	</table>
-
-	<div ng-show="error" class="error" style="border: 1px solid #F0F">{{error}}</div>
+	<div ng-include="'app/src/FileModule/Views/table.html'"></div>
 
 	<div>
 		<form ng-submit="createFolder(foldername)">
