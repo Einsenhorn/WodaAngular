@@ -36,10 +36,13 @@ angular.module('Woda', [
       User.r.read(function(data) {
         User.data = data.user;
         $rootScope.User = User.data;
+        User.r.getFriends(function(data) {
+          User.friends = data.friends;
 
-        if (!isUserAccessAllowed($route.current))
-          $location.path("/");
-        deferred.resolve(data);
+          if (!isUserAccessAllowed($route.current))
+            $location.path("/");
+          deferred.resolve(data);
+        });
       }, function() {
         if (!isAnonAccessAllowed($route.current) && !isLoginRoute($route.current)) {
           $location.path("/login");
@@ -53,98 +56,7 @@ angular.module('Woda', [
     }
   }
 
-  $routeProvider. 
-    when("/login", {
-      templateUrl: "app/src/UserModule/Views/Security/login.html",
-      controller: "AccountController",
-      _access_: {
-        _anonAllowed_: true
-      },
-      resolve: resolve
-    }).
-    when("/register", {
-      templateUrl: "app/src/UserModule/Views/Account/register.html",
-      controller: "AccountController",
-      _access_: {
-        _anonAllowed_: true
-      },
-      resolve: resolve
-    }).
-    when("/account", {
-      templateUrl: "app/src/UserModule/Views/Account/account.html",
-      controller: "AccountController",
-      _access_: {
-        _userAllowed_: true
-      },
-      resolve: resolve
-    }).
-    when("/profile", {
-      templateUrl: "app/src/UserModule/Views/Account/profile.html",
-      controller: "AccountController",
-      _access_: {
-        _userAllowed_: true
-      },
-      resolve: resolve
-    }).
-    when("/search/:query", {
-      templateUrl: "app/src/SearchModule/Views/result.html",
-      controller: "SearchController",
-      _access_: {
-        _userAllowed_: true
-      },
-      resolve: resolve
-    }).
-    when("/", {
-      templateUrl: "app/src/FileModule/Views/list.html",
-      controller: "ListController",
-      _access_: {
-        _userAllowed_: true
-      },
-      resolve: resolve
-    }).
-    when("/list", {
-      redirectTo: "/"
-    }).
-    when("/list/:FSystemId", {
-      templateUrl: "app/src/FileModule/Views/list.html",
-      controller: "ListController",
-      _access_: {
-        _userAllowed_: true
-      },
-      resolve: resolve
-    }).
-    when("/recent", {
-      templateUrl: "app/src/FileModule/Views/recent.html",
-      controller: "RecentController",
-      _access_: {
-        _userAllowed_: true
-      },
-      resolve: resolve
-    }).
-    when("/favorite", {
-      templateUrl: "app/src/FileModule/Views/favorite.html",
-      controller: "FavoriteController",
-      _access_: {
-        _userAllowed_: true
-      },
-      resolve: resolve
-    }).
-    when("/public", {
-      templateUrl: "app/src/FileModule/Views/public.html",
-      controller: "PublicController",
-      _access_: {
-        _userAllowed_: true
-      },
-      resolve: resolve
-    }).
-    when("/downloaded", {
-      templateUrl: "app/src/FileModule/Views/downloaded.html",
-      controller: "DownloadedController",
-      _access_: {
-        _userAllowed_: true
-      },
-      resolve: resolve
-    }).
+  $routeProvider.
     otherwise({
       redirectTo: "/login",
       resolve: resolve

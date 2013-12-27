@@ -1,11 +1,11 @@
 angular.module('SearchModule').controller('SearchController', ['$scope', '$location', '$routeParams', 'Search', function($scope, $location, $routeParams, Search) {
 	$scope.query = 'louis';
-	$scope.filter = 'user';
+	$scope.filter = 'users';
 
 	if ($routeParams.hasOwnProperty("query")) {
 		Search.r.request({ name: $routeParams.query }, function(data) {
-				$scope.resultUser = data.users;
-				$scope.resultUserCount = data.users.length;
+				$scope.resultUsers = data.users;
+				$scope.resultUsersCount = data.users.length;
 
 				$scope.resultPrivateFiles = data.private_files;
 				$scope.resultPrivateFilesCount = data.private_files.length;

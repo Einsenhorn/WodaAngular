@@ -1,9 +1,9 @@
-angular.module('UserModule').factory('User', ['$http', '$resource', 'WodaConfiguration', function($http, $resource, WodaConfiguration) {
+angular.module('UserModule').factory('User', ['$q', '$resource', 'WodaConfiguration', function($q, $resource, WodaConfiguration) {
 	var headers = { 'Content-Type': 'application/json' };
 
 	return {
 			data: {},
-			promise: $http.get(WodaConfiguration.host + "/users", { withCredentials: true }),
+			friends: [],
 			r: $resource(WodaConfiguration.host + '/users', {}, {
 				login: {
 					url: WodaConfiguration.host + '/users/:user/login',
@@ -35,7 +35,22 @@ angular.module('UserModule').factory('User', ['$http', '$resource', 'WodaConfigu
 					method: 'DELETE',
 					withCredentials: true,
 					headers: headers
-				}
+				}, getFriends: {
+					url: WodaConfiguration.host + '/friends',
+					method: 'GET',
+					withCredentials: true,
+					headers: headers
+				}, addFriend: {
+					url: WodaConfiguration.host + '/friends/:id',
+					method: 'PUT',
+					withCredentials: true,
+					headers: headers
+				}, deleteFriend: {
+					url: WodaConfiguration.host + '/friends/:id',
+					method: 'DELETE',
+					withCredentials: true,
+					headers: headers
+				},
 			}),
 			isLogged: function() {
 				return !(Object.keys(this.data).length === 0);
