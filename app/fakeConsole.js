@@ -1,3 +1,7 @@
+/**
+ * Insère un élément DOM qui affiche le contenu de la console. Pratique pour tester sur Android.
+ */
+
 ( function ( ) {
     var x = document.createElement( 'pre' );
     x.style.cssText = 'display:block;margin:0;position:absolute;right:0;top:0;min-height:100%;width:20%;background:white;padding:10px;border-left:1px solid black;';

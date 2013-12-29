@@ -102,16 +102,15 @@ angular.module( 'FileModule' )
                         return $http.put( WodaConfiguration.host + '/sync', {
                             filename : file.name,
                             content_hash : hash,
-                            size : descriptor.file.size
+                            size : descriptor.file.size.toString( )
                         }, {
                             withCredentials : true,
 		            headers: { 'Content-Type': 'application/json', 'X-Requested-With': '' }
-                        } ).then( function ( response ) {
+                        } ).success( function ( response ) {
 
+                            descriptor.id = response.file.id;
                             descriptor.partSize = response.part_size;
-                            descriptor.requestedParts = response.requested_parts;
-
-                            console.log( descriptor );
+                            descriptor.requestedParts = response.needed_parts;
 
                             return sendParts( descriptor );
 
@@ -162,7 +161,6 @@ angular.module( 'FileModule' )
 
                         file.blob = new Blob( file.parts.map( function ( part ) { return part.blob; } ) );
                         file.url = window.URL.createObjectURL( file.blob );
-                        console.log( file.url );
 
                     } );
 
