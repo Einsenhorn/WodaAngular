@@ -72,7 +72,6 @@ angular.module('Woda', [
 .config(['$compileProvider', function($compileProvider) {
   $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|file|blob):|data:image\//);
 }])
-/*
 .directive('file', function() {
      return {
         restrict: 'E',
@@ -90,13 +89,10 @@ angular.module('Woda', [
      };
 })
 .controller('uploadTest', function($scope, FileTransfer) {
-  $scope.foo2 = FileTransfer.download( 36 );
-
   $scope.$watch( 'foo', function ( ) {
      FileTransfer.upload( $scope.foo );
   } );
 })
-*/
 .run(['$location', '$rootScope', '$route', 'User', 'FSystem' , function($location, $rootScope, $route, User, FSystem) {
   $rootScope.title = 'Woda';
 
