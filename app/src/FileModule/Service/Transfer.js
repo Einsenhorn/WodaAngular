@@ -18,39 +18,121 @@ angular.module( 'FileModule' )
 
             upload : function ( file ) {
 
-                var next = function ( ) {
-                    var data = fileReader.result;
-                    var hash = bin2hex( new Digest.SHA256( ).digest( data ) );
+                var readParts = function ( descriptor, initial, callback ) {
 
-                    $http.put( WodaConfiguration.host + '/sync', {
-                        filename : file.name,
-                        content_hash : hash,
-                        size : data.byteLength.toString( )
-                    }, {
-                        withCredentials : true,
-		        headers: {
-			    'Content-Type': 'application/json',
-			    'X-Requested-With': ''
-		        }
-                    } ).success( function ( data ) {
-                        if ( ! data.need_upload ) return ;
-                        data.needed_parts.forEach( function ( requestedPart ) {
-                            var begin = requestedPart * data.part_size, end = begin + data.part_size;
-                            $http.put( WodaConfiguration.host + '/sync/' + data.file.id + '/' + requestedPart, file.slice( begin, end ), {
-                                withCredentials : true,
-		                headers: {
-			            'Content-Type': 'application/octet-stream',
-			            'X-Requested-With': ''
-		                },
-                                transformRequest : function ( data ) { return data; }
-                            } );
-                        } );
+                    var defer = $q.defer( ), promise = defer.promise;
+                    defer.resolve( initial );
+
+                    var file = descriptor.file;
+                    var partSize = descriptor.partSize;
+
+                    var offset = 0, size = file.size;
+                    for ( ; size > 0; offset += partSize, size -= partSize ) {
+
+                        promise = promise.then( function ( offset, size, success ) {
+
+                            var sub = file.slice( offset, offset + partSize );
+                            var defer = $q.defer( ), promise = defer.promise;
+
+                            var next = function ( ) {
+                                callback( success, fileReader.result ).then( function ( success ) {
+                                    defer.resolve( success );
+                                } );
+                            };
+
+                            var fileReader = new FileReader( );
+                            fileReader.addEventListener( 'load', next );
+                            fileReader.readAsArrayBuffer( sub );
+
+                            return promise;
+
+                        }.bind( null, offset, size ) );
+
+                    }
+
+                    return promise;
+
+                };
+
+                var computeSHA256 = function ( descriptor ) {
+                    return readParts( descriptor, new Digest.SHA256( ), function ( digest, data ) {
+
+                        digest.update( data );
+
+                        var defer = $q.defer( ), promise = defer.promise;
+                        defer.resolve( digest );
+
+                        return promise;
+
+                    } ).then( function ( digest ) {
+
+                        return bin2hex( digest.finalize( ) );
+
                     } );
                 };
 
-                var fileReader = new FileReader( );
-                fileReader.addEventListener( 'load', next );
-                fileReader.readAsArrayBuffer( file );
+                var sendParts = function ( descriptor ) {
+                    return readParts( descriptor, 0, function ( index, data ) {
+
+                        var defer = $q.defer( ), promise = defer.promise;
+                        defer.resolve( index + 1 );
+
+                        if ( descriptor.requestedParts.indexOf( index ) === - 1)
+                            return promise;
+
+                        return $http.put( WodaConfiguration.host + '/sync/' + descriptor.id + '/' + index, data, {
+                            withCredentials : true,
+		            headers: {
+			        'Content-Type': 'application/octet-stream',
+			        'X-Requested-With': '' },
+                            transformRequest : function ( data ) { return data; }
+                        } ).then( function ( ) {
+                            return promise;
+                        } );
+
+                    } );
+                };
+
+                var processUpload = function ( descriptor ) {
+
+                    descriptor.partSize = WodaConfiguration.partSize;
+
+                    return computeSHA256( descriptor ).then( function ( hash ) {
+
+                        return $http.put( WodaConfiguration.host + '/sync', {
+                            filename : file.name,
+                            content_hash : hash,
+                            size : descriptor.file.size.toString( )
+                        }, {
+                            withCredentials : true,
+		            headers: { 'Content-Type': 'application/json', 'X-Requested-With': '' }
+                        } ).success( function ( response ) {
+
+                            descriptor.id = response.file.id;
+                            descriptor.partSize = response.part_size;
+                            descriptor.requestedParts = response.needed_parts;
+
+                            return sendParts( descriptor );
+
+                        } );
+
+                    } );
+
+                };
+
+                if ( ! file ) {
+
+                    var defer = $q.defer( ), promise = defer.promise;
+                    defer.reject( 'No file' );
+                    return promise;
+
+                } else {
+
+                    return processUpload( {
+                        file : file
+                    } );
+
+                }
 
             },
 
@@ -79,7 +161,6 @@ angular.module( 'FileModule' )
 
                         file.blob = new Blob( file.parts.map( function ( part ) { return part.blob; } ) );
                         file.url = window.URL.createObjectURL( file.blob );
-                        console.log( file.url );
 
                     } );
 
