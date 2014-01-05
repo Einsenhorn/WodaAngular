@@ -5,6 +5,7 @@ angular.module('Woda', [
   'LayoutModule',
   'SearchModule',
   'UserModule',
+  'ui.bootstrap',
 ])
 .config(['$routeProvider', function($routeProvider) {
   var isLoginRoute = function(route) {

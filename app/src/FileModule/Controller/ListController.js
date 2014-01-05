@@ -16,6 +16,13 @@ angular.module('FileModule').controller('ListController', ['$scope', '$rootScope
 		}
 	);
 
+	$rootScope.$on('FSystem.fileAdd', function (event, file) {
+		if (file.folder)
+			$scope.root.folders.push(file);
+		else
+			$scope.root.files.push(file);
+	});
+
 	$scope.publicFSystem = function(fsystem) {
 		FSystem.r.public({ FSystemId: fsystem.id }, { public: !fsystem.public }, function(data) {
 			if (fsystem.hasOwnProperty("folder") && fsystem.folder === true) {
@@ -44,13 +51,6 @@ angular.module('FileModule').controller('ListController', ['$scope', '$rootScope
 				$scope.root.files.splice($scope.root.files.indexOf(fsystem), 1);
 			}
 		});
-	}
-
-	$scope.createFolder = function(foldername) {
-		//fonctionne a moitie / voir avec kevin comme creer un repertoire ailleur qu'a la racine
-		FSystem.r.createFolder({}, { filename: foldername }, function(data) {
-			$scope.root.folders.push(data.folder);
-		})
 	}
 
 	$scope.getDDL = function(fsystem) {

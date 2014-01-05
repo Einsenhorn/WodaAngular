@@ -1,22 +1,43 @@
-<div ng-show="User">
-	<div>
-		<div ng-controller="AccountController">
-		  <div ng-include="'app/src/UserModule/Views/Account/menu.html'"></div>
-		</div>
-	</div>
+<div ng-controller="HeaderController">
+  <div id="header">
+    <div id="logo"></div>
+    <a user-logout>
+      <div id="user" ng-controller="AccountController">
+        <div id="userImg"></div>
+        <div id="userName">{{User.login}}</div>
+      </div>
+    </a>
+  </div>
+  <div id="searchnstuff">
+  	<div ng-controller="SearchController">
+  		<div ng-include="'app/src/SearchModule/Views/form.html'"></div>
+  	</div>
 
-	<div>
-		<div ng-controller="SearchController">
-		  <div ng-include="'app/src/SearchModule/Views/form.html'"></div>
-		</div>
-	</div>
+    <div id="searchnactions">
+      <div id="newFolder" ng-click="openCreateFolderModal()"></div>
+      <div id="uploadFile"></div>
+    </div>
 
-	<div>
-		<ul>
-			<li><a ng-href="#/">Files</a></li>
-			<li><a ng-href="#/recent">Recent</a></li>
-			<li><a ng-href="#/favorite">Favorite</a></li>
-			<li><a ng-href="#/public">Public</a></li>
-			<li><a ng-href="#/downloaded">Downloaded</a></li>
-		</ul>
+  </div>
+  <div id="menubar">
+    <ul>
+    	<a ng-href="#/">
+        <li ng-class="(currentPage == 'home') ? 'active' : ''">Home</li>
+      </a>
+      <a ng-href="#/recent">
+        <li ng-class="(currentPage == 'recent') ? 'active' : ''">Recent</li>
+      </a>
+      <a ng-href="#/favorite">
+        <li ng-class="(currentPage == 'favorite') ? 'active' : ''">Favorite</li>
+      </a>
+      <a ng-href="#/public">
+        <li ng-class="(currentPage == 'public') ? 'active' : ''">Public</li>
+      </a>
+      <a ng-href="#/downloaded">
+        <li>Downloaded</li>
+      </a>
+      <a ng-href="#"><li>Friends</li></a>
+    </ul>
+  </div>
+
 </div>
