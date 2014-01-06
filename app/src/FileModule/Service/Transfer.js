@@ -16,7 +16,7 @@ angular.module( 'FileModule' )
 
         return {
 
-            upload : function ( file ) {
+            upload : function ( file, descriptor ) {
 
                 var readParts = function ( descriptor, initial, callback ) {
 
@@ -24,20 +24,34 @@ angular.module( 'FileModule' )
                     defer.resolve( initial );
 
                     var file = descriptor.file;
+
+                    var partIndex = 0;
                     var partSize = descriptor.partSize;
+                    var partCount = Math.ceil( file.size / partSize );
 
-                    var offset = 0, size = file.size;
-                    for ( ; size > 0; offset += partSize, size -= partSize ) {
+                    for ( ; partIndex < partCount; ++ partIndex ) {
 
-                        promise = promise.then( function ( offset, size, success ) {
+                        promise = promise.then( function ( partIndex, success ) {
+
+                            var offset = partIndex * partSize;
 
                             var sub = file.slice( offset, offset + partSize );
                             var defer = $q.defer( ), promise = defer.promise;
 
                             var next = function ( ) {
+
+                                descriptor.partIndex = partIndex;
+                                descriptor.partCount = partCount;
+
                                 callback( success, fileReader.result ).then( function ( success ) {
+
+                                    descriptor.partIndex = partIndex + 1;
+                                    descriptor.partCount = partCount;
+
                                     defer.resolve( success );
+
                                 } );
+
                             };
 
                             var fileReader = new FileReader( );
@@ -46,7 +60,7 @@ angular.module( 'FileModule' )
 
                             return promise;
 
-                        }.bind( null, offset, size ) );
+                        }.bind( null, partIndex ) );
 
                     }
 
@@ -55,6 +69,9 @@ angular.module( 'FileModule' )
                 };
 
                 var computeSHA256 = function ( descriptor ) {
+
+                    descriptor.status = 'hashing';
+
                     return readParts( descriptor, new Digest.SHA256( ), function ( digest, data ) {
 
                         digest.update( data );
@@ -69,9 +86,13 @@ angular.module( 'FileModule' )
                         return bin2hex( digest.finalize( ) );
 
                     } );
+
                 };
 
                 var sendParts = function ( descriptor ) {
+
+                    descriptor.status = 'sending';
+
                     return readParts( descriptor, 0, function ( index, data ) {
 
                         var defer = $q.defer( ), promise = defer.promise;
@@ -91,6 +112,7 @@ angular.module( 'FileModule' )
                         } );
 
                     } );
+
                 };
 
                 var processUpload = function ( descriptor ) {
@@ -128,9 +150,10 @@ angular.module( 'FileModule' )
 
                 } else {
 
-                    return processUpload( {
-                        file : file
-                    } );
+                    descriptor = descriptor || { };
+                    descriptor.file = file;
+
+                    return processUpload( descriptor );
 
                 }
 
