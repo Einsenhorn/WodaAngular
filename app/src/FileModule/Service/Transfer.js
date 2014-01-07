@@ -168,7 +168,9 @@ angular.module( 'FileModule' )
 
                 return file;
 
-            }
+            },
+
+            files: [],
 
         };
 

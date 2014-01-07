@@ -1,23 +1,8 @@
 angular.module('LayoutModule')
-.controller('CreateFolderModalController', function ($scope, $modalInstance, FSystem, $rootScope){
-
-	$scope.createFolder = function(foldername) {
-		//fonctionne a moitie / voir avec kevin comme creer un repertoire ailleur qu'a la racine
-		FSystem.r.createFolder({}, { filename: foldername }, function(data) {
-			
-			$rootScope.$emit('FSystem.fileAdd', data.folder);
-			$modalInstance.close();
-		})
-	}
-
-	$scope.cancel = function () {
-		$modalInstance.dismiss('cancel');
-	};
-
-})
-.controller('HeaderController', ['$scope', '$rootScope', 'User', '$location', '$modal', '$routeParams', function($scope, $rootScope, User, $location, $modal, $routeParams) {
+.controller('HeaderController', ['$scope', '$rootScope', 'User', '$location', '$modal', '$routeParams', 'User', function($scope, $rootScope, User, $location, $modal, $routeParams, User) {
 
 	$scope.currentPage = getCurrentPage($location.path());
+	$scope.User = User;
 
 	function getCurrentPage(path) {
 		if (path.indexOf('recent') != -1)
@@ -44,21 +29,29 @@ angular.module('LayoutModule')
 
 	$scope.openCreateFolderModal = function () {
     	var modalInstance = $modal.open({
-		templateUrl: 'app/src/LayoutModule/Views/CreateFolderModal.html',
-		controller: 'CreateFolderModalController',
-		resolve: {
-			items: function () {
-				return $scope.items;
-			}
-		}
-    });
+			templateUrl: 'app/src/LayoutModule/Views/CreateFolderModal.html',
+			controller: 'CreateFolderModalController'
+    	});
 
-    modalInstance.result.then(function (selectedItem) {
-    	$scope.selected = selectedItem;
-    }, function () {
-    	// $log.info('Modal dismissed at: ' + new Date());
-    });
-  };
+	    modalInstance.result.then(function () {
+	    	//validated
+	    }, function () {
+	    	// $log.info('Modal dismissed at: ' + new Date());
+	    });
+	};
 
-}])
-;
+    $scope.openUploadModal = function () {
+    	var modalInstance = $modal.open({
+			templateUrl: 'app/src/LayoutModule/Views/UploadModal.html',
+			controller: 'UploadModalController'
+    	});
+
+	    modalInstance.result.then(function () {
+	    	// validated
+	    }, function () {
+	    	// $log.info('Modal dismissed at: ' + new Date());
+	    });
+	};
+
+
+}]);

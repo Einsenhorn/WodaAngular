@@ -1,14 +1,15 @@
-<div>
+<div id="login">
 
-	<form id="login" ng-submit="login(user, password)">
-		<input type="text" placeholder="Your username here" ng-model="user" autofocus>
-		<input type="password" ng-model="password">
-		<input type="submit" value="Sign in">
+	<h2>LOG IN</h2>
+
+	<form ng-submit="login(user, password)">
+		<input type="text" class="text" placeholder="Username or Email" ng-model="user" autofocus>
+		<input type="password" class="text" placeholder="Password" ng-model="password">
+		<a href="#/">forgotten username or password ?</a><br />
+		<input class="btnclassic" type="submit" value="LOG IN">
 	</form>
 
 	<div ng-show="errorMessage.length != 0" class="error">{{errorMessage}}</div>
-
-</div>
-<div>
-	<a ng-href="#/register">Sign up !</a>
+	<br />
+	<h4>No Account yet? <a ng-href="#/register">Sign up !</a></h4>
 </div>

@@ -1,4 +1,8 @@
-<table style="width:100%" ng-show="!error">
+<div ng-if="(root.folders.length + root.files.length == 0) ? true : false">
+	No files.
+</div>
+
+<table ng-if="(root.folders.length + root.files.length != 0) ? true : false" style="width:100%" ng-show="!error">
 	<thead>
 	  <tr>
 	    <th class="files">FILES</th>
@@ -45,6 +49,3 @@
 	  </tr>
 	</tbody>
 </table>
-
-
-<div ng-show="error" class="error" style="border: 1px solid #F0F">{{error}}</div>

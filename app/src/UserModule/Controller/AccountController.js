@@ -2,9 +2,9 @@ angular.module('UserModule').controller('AccountController', ['$scope', '$rootSc
 	$rootScope.title = 'Woda';
 	$scope.errorMessage = "";
 
-	/* --- */
-	$scope.user = 'mael';
-	$scope.password = 'azerty42';
+	// /* --- */
+	// $scope.user = 'mael';
+	// $scope.password = 'azerty42';
 	/* --- */
 
 	$scope.register = function(user, email, password) {

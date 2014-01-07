@@ -1,12 +1,13 @@
-<h2>Sign up for Woda</h2>
+<div id="login">
 
-<div>
+	<h2>SIGN UP</h2>
+
 	<form id="register" ng-submit="register(user, email, password)">
-		<input type="text" placeholder="Pick a username" ng-model="user" autofocus>
-		<input type="text" placeholder="Your email" ng-model="email">
-		<input type="password" placeholder="Create a password" ng-model="password">
-		<input type="submit" value="Sign up for Woda">
+		<input type="text" class="text"  placeholder="Pick a username" ng-model="user" autofocus>
+		<input type="text" class="text"  placeholder="Your email" ng-model="email">
+		<input type="password" class="text"  placeholder="Create a password" ng-model="password">
+		<input type="submit" class="btnclassic" value="SIGN UP">
 	</form>
-
 	<div ng-show="errorMessage.length != 0" class="error">{{errorMessage}}</div>
+	<h5><a ng-href="#/login">Back to login</a></h5>
 </div>

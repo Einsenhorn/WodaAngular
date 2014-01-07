@@ -31,7 +31,7 @@
 
 	<script src="app/src/LayoutModule/LayoutModule.js"></script>
 	<script src="app/src/LayoutModule/Controller/HeaderController.js"></script>
-	<script src="app/src/LayoutModule/Controller/ModalController.js"></script>
+	<script src="app/src/LayoutModule/Controller/FileModalsController.js"></script>
 
 	<script src="app/src/SearchModule/SearchModule.js"></script>
 	<script src="app/src/SearchModule/Controller/SearchController.js"></script>
@@ -48,10 +48,7 @@
 <body>
 
 	<div id="globalcontainer" >
-		<div ng-show="User">
-			<div ng-include="'app/src/LayoutModule/Views/Header.html'"></div>
-		</div>
-
+		<div ng-include="'app/src/LayoutModule/Views/Header.html'"></div>
 		<div ng-view></div>
 	</div>
 

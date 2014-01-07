@@ -1,5 +1,7 @@
-angular.module('FileModule').controller('ListController', ['$scope', '$rootScope', '$routeParams', '$location', 'FSystem', function($scope, $rootScope, $routeParams, $location, FSystem) {
+angular.module('FileModule').controller('ListController', ['$scope', '$rootScope', '$routeParams', '$location', 'FSystem', 'FileTransfer', function($scope, $rootScope, $routeParams, $location, FSystem, FileTransfer) {
 	$scope.root = {};
+
+	$scope.file = {};
 
 	FSystem.r.getList({ FSystemId: $routeParams.hasOwnProperty("FSystemId") ? $routeParams.FSystemId : '' }, function(data) {
 			if (!data.hasOwnProperty("folder")) {
@@ -22,6 +24,10 @@ angular.module('FileModule').controller('ListController', ['$scope', '$rootScope
 		else
 			$scope.root.files.push(file);
 	});
+
+	$scope.$watch( 'fichier', function ( ) {
+    	FileTransfer.upload( $scope.fichier );
+ 	} );
 
 	$scope.publicFSystem = function(fsystem) {
 		FSystem.r.public({ FSystemId: fsystem.id }, { public: !fsystem.public }, function(data) {
