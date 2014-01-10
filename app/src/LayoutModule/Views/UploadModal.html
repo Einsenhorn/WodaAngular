@@ -2,15 +2,34 @@
 	<h3>File upload :</h3>
 </div>
 <div class="modal-body">
+	<div id="uploadform">
+		<file ng-model="uploadFile"></file>
+		<button class="btnclassic" ng-click="startUpload(uploadFile)">Upload File</button>
+	</div>
 
-<file ng-model="uploadFile"></file>
-<button class="btnclassic" ng-click="startUpload(uploadFile)">Upload File</button>
+	<div id="content" ng-if="files != {}">
+		<table>
+			<thead>
+				<th>Filename</th>
+				<th>status</th>
+				<th>progress</th>
+			</thead>
+			<tbody>
+				<tr ng-repeat="file in files">
+					<td style="width:50%;">{{ file.file.name }}</td>
+					<td style="width:30%;">{{ file.status }} <span ng-if="file.error"> : {{file.error.message}}</span></td>
+					<td style="width:20%;">{{ file.partIndex }} / {{ file.partCount }}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 
-
-
+	<div ng-if="files == {}">
+		No files uploaded.
+	</div>
 
 
 </div>
 <div class="modal-footer">
-	<button class="btnclassic" ng-click="cancel()">Cancel</button>
+	<span class="thin">(closing this window will not interrupt your uploads)</span><button class="btnclassic" ng-click="cancel()">Close</button>
 </div>

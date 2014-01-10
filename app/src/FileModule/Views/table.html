@@ -1,3 +1,4 @@
+
 <div ng-if="(root.folders.length + root.files.length == 0) ? true : false">
 	No files.
 </div>
@@ -17,7 +18,7 @@
 	    <td ng-show="show">
 	    	<i class="btn"></i>
 	    	<i class="btn"></i>
-	      <a><i class="btn btn-move"></i></a> 
+	      <a><i class="btn btn-move"></i></a>
 	      <a ng-click="deleteFSystem(folder)"><i class="btn btn-delete"></i></a>
 	    </td>
 	    <td ng-show="!show">
@@ -33,9 +34,9 @@
 	  <tr ng-repeat="file in root.files" ng-mouseenter="show = true" ng-mouseleave="show = false" >
 	    <td class="files">{{file.name}}</td>
 	    <td ng-show="show">
-	      <a><i class="btn btn-move"></i></a> 
-	      <a ng-click="alert('dl link')"><i class="btn btn-links"></i></a> 
-	      <a ng-click="getDDL(file)"><i class="btn btn-download"></i></a> 
+	      <a><i class="btn btn-move"></i></a>
+	      <a ng-click="alert('dl link')"><i class="btn btn-links"></i></a>
+	      <a ng-click="getDDL(file)"><i class="btn btn-download"></i></a>
 	      <a ng-click="deleteFSystem(file)"><i class="btn btn-delete"></i></a>
 	    </td>
 	    <td ng-show="!show">

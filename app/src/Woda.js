@@ -84,7 +84,7 @@ angular.module('Woda', [
 })
 .controller('uploadTest', function($scope, FileTransfer) {
   $scope.$watch( 'foo', function ( ) {
-     FileTransfer.upload( $scope.foo );
+    FileTransfer.upload( $scope.foo, $scope.upload = { } );
   } );
 })
 .run(['$q', '$location', '$rootScope', '$route', 'User', 'FSystem', function($q, $location, $rootScope, $route, User, FSystem) {

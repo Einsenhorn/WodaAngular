@@ -222,33 +222,36 @@ div#content {
 	padding-left: 30px;
 }
 
-div#content table {
+table {
 	border-collapse: collapse;
+	width: 100%;
 }
 
-div#content table tbody {
+table tbody {
 	display: table-row-group;
 	vertical-align: middle;
 	border-color: inherit;
 }
 
-div#content table thead tr {
+table thead tr {
 	border-top: 0px;
 	line-height: 32px;
 	font-family : "Titillium-Semibold", Helvetica, Arial, sans-serif;
 }
 
-div#content table tr {
+table tr {
 	line-height: 22px;
 	border-top: 1px #000000 solid;
 }
 
-div#content table tbody tr:hover {
+table tbody tr:hover {
 	background-color: #eaeaea;
 } 
 
-div#content table td {
+table td {
 	text-align:center;
+	width: auto;
+	overflow-x:hidden;
 }
 
 div#content table .files {
@@ -457,6 +460,16 @@ div#login {
 	font-size: 100px;
 	text-align: center;
 	line-height: 30px;
+}
+
+div#uploadform {
+	width:100%;
+	text-align: center;
+}
+
+span.thin {
+	font-family : "Titillium-Thin", Helvetica, Arial, sans-serif;
+	color: #3c3c3c;
 }
 
 .text::-webkit-input-placeholder { font-size: 20px; }

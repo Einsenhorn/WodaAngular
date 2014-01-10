@@ -15,21 +15,33 @@ angular.module('LayoutModule')
 	};
 
 }])
-.controller('UploadModalController', ['$modalInstance', '$scope', 'FileTransfer', function ($modalInstance, $scope, FileTransfer){
+.controller('UploadModalController', ['$modalInstance', '$scope', 'FileTransfer', '$rootScope', function ($modalInstance, $scope, FileTransfer, $rootScope){
+
+	$scope.files = FileTransfer.files;
+
+	$scope.$watch(FileTransfer.files, function(data){
+		console.log('WE HERE!');
+		
+	});
 
 	$scope.startUpload = function(file) {
-		console.log('HEY');
-		file = FileTransfer.upload(file);
-		console.log(file);
-		file.then(function(upload) {
-		  console.log(upload);
-		}, function(reason) {
-		  alert('Failed: ' + reason);
-		  console.log(reason);
-		}, function(update) {
-		  alert('Got notification: ' + update);
+		var progress = {};
+
+		transfer = FileTransfer.upload(file, progress);
+
+		console.log(transfer);
+		transfer.then(function(data){
+			console.log(progress);
+			$rootScope.$emit('FSystem.fileAdd', progress.model);
+		})
+
+		FileTransfer.files.push(progress);
+
+		$scope.$watch(progress, function(data){
+			console.log('test >>>> ', $scope.progress);
 		});
-		FileTransfer.files.push(file);
+
+		// FileTransfer.files.push(file);
 	};
 
 	$scope.cancel = function () {
