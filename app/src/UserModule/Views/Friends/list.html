@@ -1,4 +1,4 @@
-<table border="1" ng-show="friends.length">
+<!-- <table border="1" ng-show="friends.length">
 	<thead>
 		<tr>
 		    <th>Name</th>
@@ -11,4 +11,22 @@
 			<th><span user-manage-friend></span></th>
 		</tr>
 	</tbody>
-</table>
+</table> -->
+<div id="content">
+
+	<table style="width:100%">
+		<thead>
+		  <tr>
+			<th class="files">USERS</th>
+			<th></th>
+		  </tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="user in friends">
+				<td><a ng-href="#/profile/{{user.id}}">{{user.login}}</a></td>
+				<td><span user-manage-friend></span></td>
+			</tr>
+		</tbody>
+	</table>
+	
+</div>
