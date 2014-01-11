@@ -3,7 +3,6 @@ angular.module('LayoutModule')
     $scope.show = false;
 
     $rootScope.$watch("User", function (event, next, current) {
-        console.debug(next.User);
         $scope.show = User.isLogged() ? true : false;
     });
 
