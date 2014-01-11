@@ -30,7 +30,7 @@ angular.module('FileModule').controller('ListController', ['$scope', '$rootScope
  	} );
 
 	$scope.publicFSystem = function(fsystem) {
-		FSystem.r.public({ FSystemId: fsystem.id }, { public: !fsystem.public }, function(data) {
+		FSystem.r.public({ FSystemId: fsystem.id }, { public: fsystem.public ? 'false' : 'true' }, function(data) {
 			if (fsystem.hasOwnProperty("folder") && fsystem.folder === true) {
 				$scope.root.folders[$scope.root.folders.indexOf(fsystem)] = data.file;
 			} else {
@@ -40,7 +40,7 @@ angular.module('FileModule').controller('ListController', ['$scope', '$rootScope
 	}
 
 	$scope.favoriteFSystem = function(fsystem) {
-		FSystem.r.favorite({ FSystemId: fsystem.id }, { favorite: !fsystem.favorite }, function(data) {
+		FSystem.r.favorite({ FSystemId: fsystem.id }, { favorite: fsystem.favorite ? 'false' : 'true' }, function(data) {
 			if (fsystem.hasOwnProperty("folder") && fsystem.folder === true) {
 				$scope.root.folders[$scope.root.folders.indexOf(fsystem)] = data.file;
 			} else {

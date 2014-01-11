@@ -46,7 +46,7 @@
 	      <i class="btn"></i>
 	    </td>
 	    <td>{{file.last_update | date: 'short'}}</td>
-	    <td><a ng-click="publicFSystem(file)"><i class="btn" ng-class="(folder.public) ? 'btn-unpublic' : 'btn-public'"></i></a> <a ng-click="favoriteFSystem(file)"><i class="btn btn-fav"></i></a></td>
+	    <td><a ng-click="publicFSystem(file)"><i class="btn" ng-class="(file.public) ? 'btn-unpublic' : 'btn-public'"></i></a> <a ng-click="favoriteFSystem(file)"><i class="btn btn-fav"></i></a></td>
 	  </tr>
 	</tbody>
 </table>

@@ -87,8 +87,9 @@ angular.module('Woda', [
     FileTransfer.upload( $scope.foo, $scope.upload = { } );
   } );
 })
-.run(['$q', '$location', '$rootScope', '$route', 'User', 'FSystem', function($q, $location, $rootScope, $route, User, FSystem) {
+.run(['$q', '$location', '$rootScope', '$route', 'User', function($q, $location, $rootScope, $route, User) {
   $rootScope.title = 'Woda';
+  $rootScope.User = {};
 
   var isLoginRoute = function(route) {
     return route.hasOwnProperty("$$route") && route.$$route.originalPath.indexOf("login") >= 0;
