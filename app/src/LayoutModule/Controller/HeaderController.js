@@ -1,8 +1,13 @@
 angular.module('LayoutModule')
-.controller('HeaderController', ['$scope', '$rootScope', 'User', '$location', '$modal', '$routeParams', 'User', function($scope, $rootScope, User, $location, $modal, $routeParams, User) {
+.controller('HeaderController', ['$scope', '$rootScope', 'User', '$location', '$modal', 'User', function($scope, $rootScope, User, $location, $modal, User) {
+    $scope.show = false;
 
-	$scope.currentPage = getCurrentPage($location.path());
-	$scope.User = User;
+    $rootScope.$watch("User", function (event, next, current) {
+        console.debug(next.User);
+        $scope.show = User.isLogged() ? true : false;
+    });
+
+    $scope.currentPage = getCurrentPage($location.path());
 
 	function getCurrentPage(path) {
 		if (path.indexOf('recent') != -1)

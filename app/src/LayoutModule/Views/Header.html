@@ -1,8 +1,8 @@
 <div ng-controller="HeaderController">
-  <div ng-if="User.isLogged()">
+  <div ng-if="show">
     <div id="header">
       <div id="logo"></div>
-      <!-- <a user-logout> -->
+     <a user-logout>
         <div id="user" ng-controller="AccountController">
           <div id="userImg"></div>
           <div id="userName">{{User.data.login}}</div>
@@ -11,7 +11,7 @@
             <div><i class="btn btn-move"></i> Log Out</div>
           </div>
         </div>
-      <!-- </a> -->
+      </a>
     </div>
     <div id="searchnstuff">
     	<div ng-controller="SearchController">

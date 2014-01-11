@@ -1,15 +1,11 @@
-angular.module('UserModule').controller('AccountController', ['$scope', '$rootScope', '$location', 'User', 'FSystem', function($scope, $rootScope, $location, User, FSystem) {
+angular.module('UserModule').controller('AccountController', ['$scope', '$rootScope', '$location', 'User', function($scope, $rootScope, $location, User) {
 	$rootScope.title = 'Woda';
 	$scope.errorMessage = "";
-
-	// /* --- */
-	// $scope.user = 'mael';
-	// $scope.password = 'azerty42';
-	/* --- */
 
 	$scope.register = function(user, email, password) {
 		User.r.create({ user: user }, { email: email, password: password }, function(data) {
 				User.data = data.user;
+                $rootScope.User = User.data;
 				$location.path('/');
 			}, function(httpResponse) {
 				if (httpResponse.status == 400) {
@@ -34,6 +30,7 @@ angular.module('UserModule').controller('AccountController', ['$scope', '$rootSc
 	$scope.delete = function() {
 		User.r.delete(function(data) {
 				User.data = {};
+                $rootScope.User = {};
 				$location.path("/login");
 			}
 		);
@@ -43,6 +40,7 @@ angular.module('UserModule').controller('AccountController', ['$scope', '$rootSc
 	$scope.login = function(user, password) {
 		User.r.login({ user: user }, { password: password }, function(data) {
 				User.data = data.user;
+                $rootScope.User = User.data;
 				User.r.getFriends(function(data) {
 					User.friends = data.friends;
 					$location.path("/");
