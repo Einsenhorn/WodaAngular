@@ -39,9 +39,11 @@
           <li ng-class="(currentPage == 'public') ? 'active' : ''">Public</li>
         </a>
         <a ng-href="#/downloaded">
-          <li>Downloaded</li>
+          <li ng-class="(currentPage == 'downloaded') ? 'active' : ''">Downloaded</li>
         </a>
-        <a ng-href="#"><li>Friends</li></a>
+        <a ng-href="#/friends">
+          <li ng-class="(currentPage == 'friends') ? 'active' : ''">Friends</li>
+        </a>
       </ul>
     </div>
   </div>

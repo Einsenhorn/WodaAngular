@@ -13,6 +13,8 @@ angular.module('LayoutModule')
 			return 'public';
 		if (path.indexOf('downloaded') != -1)
 			return 'downloaded';
+		if (path.indexOf('friends') != -1)
+			return 'friends';
 		return 'home';
 	}
 
