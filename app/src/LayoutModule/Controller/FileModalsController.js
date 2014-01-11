@@ -19,29 +19,18 @@ angular.module('LayoutModule')
 
 	$scope.files = FileTransfer.files;
 
-	$scope.$watch(FileTransfer.files, function(data){
-		console.log('WE HERE!');
-		
-	});
-
 	$scope.startUpload = function(file) {
 		var progress = {};
 
 		transfer = FileTransfer.upload(file, progress);
 
-		console.log(transfer);
+		if (file)
+			FileTransfer.files.push(progress);
+
 		transfer.then(function(data){
 			console.log(progress);
 			$rootScope.$emit('FSystem.fileAdd', progress.model);
 		})
-
-		FileTransfer.files.push(progress);
-
-		$scope.$watch(progress, function(data){
-			console.log('test >>>> ', $scope.progress);
-		});
-
-		// FileTransfer.files.push(file);
 	};
 
 	$scope.cancel = function () {
