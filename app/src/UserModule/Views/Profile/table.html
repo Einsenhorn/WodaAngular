@@ -1,0 +1,43 @@
+<div ng-if="(root.folders.length + root.files.length == 0) ? true : false">
+    No files.
+</div>
+
+<div ng-if="(root.folders.length + root.files.length != 0) ? true : false">
+    <p style="text-align:center"><b>{{user.login | uppercase}} PUBLIC FILES</b></p>
+
+    <table style="width:100%" ng-show="!error">
+        <thead>
+        <tr>
+            <th class="files">FILES</th>
+            <th></th>
+            <th>MODIFIED</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="folder in root.folders" ng-mouseenter="show = true" ng-mouseleave="show = false">
+            <td class="files"><a ng-href="#/profile/{{user.id}}/public/{{folder.id}}">{{folder.name}}</a></td>
+            <td ng-show="show">
+                <i class="btn"></i>
+            </td>
+            <td ng-show="!show">
+                <i class="btn"></i>
+            </td>
+            <td>{{folder.last_update | date: 'short'}}</td>
+        </tr>
+
+        <tr ng-repeat="file in root.files" ng-mouseenter="show = true" ng-mouseleave="show = false" >
+            <td class="files">{{file.name}}</td>
+            <td ng-show="show">
+                <i class="btn"></i>
+                <a ng-click="getDDL(file)"><i class="btn btn-download"></i></a>
+            </td>
+            <td ng-show="!show">
+                <i class="btn"></i>
+                <i class="btn"></i>
+            </td>
+            <td>{{file.last_update | date: 'short'}}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>

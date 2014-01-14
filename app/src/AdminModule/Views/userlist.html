@@ -1,0 +1,23 @@
+<div id="content">
+
+    <table ng-if="!error" style="width:100%">
+        <thead>
+        <tr>
+            <th class="files">USERS</th>
+            <th>USER SPACE</th>
+            <th>DELETE USERS</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="user in users">
+            <td><a href="">{{user.login}}</a></td>
+            <td><input ng-blur="updateUserSpace(user)" ng-model="user.space" style="text-align:center" type="text"/></td>
+            <td><span ng-click="deleteUser(user, $index)">X</span></td>
+        </tr>
+        </tbody>
+    </table>
+    <div ng-if="error" style="text-align:center;font-size:60px;color:#F00">
+        {{error}}
+    </div>
+
+</div>
