@@ -1,6 +1,7 @@
 angular.module('Woda', [
   'ngRoute',
 
+  'AdminModule',
   'FileModule',
   'LayoutModule',
   'SearchModule',
