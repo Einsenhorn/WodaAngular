@@ -53,7 +53,7 @@ angular.module('FileModule', [
 
   $routeProvider.
   when("/", {
-      controller: "ListController",
+      controller: "HomeController",
       templateUrl: "app/src/FileModule/Views/list.html",
       _access_: {
         _userAllowed_: true
@@ -64,7 +64,7 @@ angular.module('FileModule', [
       redirectTo: "/"
     }).
     when("/list/:FSystemId", {
-      controller: "ListController",
+      controller: "HomeController",
       templateUrl: "app/src/FileModule/Views/list.html",
       _access_: {
         _userAllowed_: true

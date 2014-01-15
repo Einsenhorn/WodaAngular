@@ -1,22 +1,4 @@
-angular.module('FileModule').controller('ListController', ['$scope', '$rootScope', '$routeParams', '$location', 'FSystem', 'FileTransfer', function($scope, $rootScope, $routeParams, $location, FSystem, FileTransfer) {
-	$scope.root = {};
-
-	$scope.file = {};
-
-	FSystem.r.getList({ FSystemId: $routeParams.hasOwnProperty("FSystemId") ? $routeParams.FSystemId : '' }, function(data) {
-			if (!data.hasOwnProperty("folder")) {
-				$location.path('/');
-				return ;
-			}
-
-			$scope.root = data.folder;
-			$rootScope.title = $scope.root.name;
-		}, function(httpResponse) {
-			if (httpResponse.status == 400) {
-				$scope.error = httpResponse.data.message;
-			}
-		}
-	);
+angular.module('FileModule').controller('ListController', ['$scope', '$rootScope', 'FSystem', function($scope, $rootScope, FSystem) {
 
 	$rootScope.$on('FSystem.fileAdd', function (event, file) {
 		if (file.folder)
@@ -25,12 +7,8 @@ angular.module('FileModule').controller('ListController', ['$scope', '$rootScope
 			$scope.root.files.push(file);
 	});
 
-	$scope.$watch( 'fichier', function ( ) {
-    	FileTransfer.upload( $scope.fichier );
- 	} );
-
 	$scope.publicFSystem = function(fsystem) {
-		FSystem.r.public({ FSystemId: fsystem.id }, { public: fsystem.public ? 'false' : 'true' }, function(data) {
+		FSystem.r.public({ FSystemId: fsystem.id }, { public: (fsystem.public) ? 'false' : 'true' }, function(data) {
 			if (fsystem.hasOwnProperty("folder") && fsystem.folder === true) {
 				$scope.root.folders[$scope.root.folders.indexOf(fsystem)] = data.file;
 			} else {
@@ -40,7 +18,7 @@ angular.module('FileModule').controller('ListController', ['$scope', '$rootScope
 	}
 
 	$scope.favoriteFSystem = function(fsystem) {
-		FSystem.r.favorite({ FSystemId: fsystem.id }, { favorite: fsystem.favorite ? 'false' : 'true' }, function(data) {
+		FSystem.r.favorite({ FSystemId: fsystem.id }, { favorite: (fsystem.favorite) ? 'false' : 'true' }, function(data) {
 			if (fsystem.hasOwnProperty("folder") && fsystem.folder === true) {
 				$scope.root.folders[$scope.root.folders.indexOf(fsystem)] = data.file;
 			} else {
