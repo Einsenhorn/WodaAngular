@@ -28,10 +28,6 @@ angular.module('LayoutModule')
 		// angular.element('.active').removeClass('active');
 		// angular.element('a[href="#'+ $location.path() +'"]').addClass('active');
 		$scope.currentPage = getCurrentPage($location.path());
-
-		console.log($scope.currentPage);
-		console.log($location.path());
-
 	});
 
 

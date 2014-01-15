@@ -2,9 +2,15 @@ angular.module('LayoutModule')
 .controller('CreateFolderModalController', ['$scope', '$modalInstance', 'FSystem', '$rootScope', function ($scope, $modalInstance, FSystem, $rootScope){
 
 	$scope.createFolder = function(foldername) {
+        var breadcrumb = $rootScope.breadcrumb;
+
+        if (breadcrumb == '//') {
+            breadcrumb = '';
+        }
+
 		//fonctionne a moitie / voir avec kevin comme creer un repertoire ailleur qu'a la racine
-		FSystem.r.createFolder({}, { filename: foldername }, function(data) {
-			
+        console.debug($rootScope.breadcrumb);
+		FSystem.r.createFolder({}, { filename: breadcrumb + '/' + foldername }, function(data) {
 			$rootScope.$emit('FSystem.fileAdd', data.folder);
 			$modalInstance.close();
 		})

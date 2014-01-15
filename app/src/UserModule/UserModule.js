@@ -25,6 +25,8 @@ angular.module('UserModule', [
 
   var resolve = {
     "UserLoading": function($q, $rootScope, $route, $location, User) {
+      $rootScope.breadcrumb = '';
+
       if (User.isLogged())
         return ;
 

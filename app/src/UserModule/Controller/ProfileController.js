@@ -1,7 +1,5 @@
 angular.module('UserModule').controller('ProfileController', ['$scope', '$routeParams', '$rootScope', 'User', 'FSystem', function($scope, $routeParams, $rootScope, User, FSystem) {
 	if ($routeParams.hasOwnProperty("login")) {
-        console.debug($routeParams.login);
-
         User.r.read({ user: $routeParams.login }, {}, function(data) {
                 $scope.user = data.user;
 
