@@ -13,7 +13,7 @@ angular.module('SearchModule').controller('SearchController', ['$scope', '$locat
 		$scope.root.files = [];
 		$scope.root.folders = [];
 		$scope.root.users = [];
-		angular.forEach(result, function(value, key){
+		angular.forEach(result, function(value, key) {
 			if (value.hasOwnProperty('login'))
 				$scope.root.users.push(value);
 			else if (value.folder)
@@ -55,9 +55,11 @@ angular.module('SearchModule').controller('SearchController', ['$scope', '$locat
 		switch(type)
 		{
 			case 'private':
+                $scope.private = true;
 				setUpRootFolder($scope.result.privateFiles);
 				break;
 			case 'public':
+                $scope.private = false;
 				setUpRootFolder($scope.result.publicFiles);
 				break
 			case 'users':

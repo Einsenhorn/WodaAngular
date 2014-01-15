@@ -8,7 +8,8 @@
 
 <div>
 	<div id="content">
-		<div ng-include="'app/src/FileModule/Views/table.html'" ng-if="!showusers"></div>
+        <div ng-include="'app/src/FileModule/Views/table.html'" ng-if="!showusers && private == true"></div>
+        <div ng-include="'app/src/SearchModule/Views/table.html'" ng-if="!showusers && private == false"></div>
 		<div ng-if="showusers">
 			<table style="width:100%">
 				<thead>

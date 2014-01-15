@@ -3,7 +3,14 @@ angular.module('FileModule').factory('FSystem', ['$resource', 'WodaConfiguration
 
 	return {
 		r: $resource(WodaConfiguration.host + '/files', {}, {
-			getList: {
+			getUserPublicList: {
+                url: WodaConfiguration.host + '/usersfiles/:user/:FSystemId',
+                method:'GET',
+                params: { depth: 0 },
+                withCredentials: true,
+                headers: headers
+            },
+            getList: {
 				url: WodaConfiguration.host + '/files/:FSystemId',
 				method:'GET',
 				params: { depth: 0 },

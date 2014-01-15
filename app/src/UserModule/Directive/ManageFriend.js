@@ -22,27 +22,27 @@ angular.module('UserModule').directive('userManageFriend', ['$compile', '$routeP
 				}
 
 			compileManageFriendTemplate($compile, $element, $scope, template)
-    },
+        },
 		controller: function($scope, $element) {
-      $scope.addFriend = function(reload) {
-				User.r.addFriend({ id: $scope.user.id }, {}, function(data) {
-					User.friends.push(data.friend);
-					compileManageFriendTemplate($compile, $element, $scope, templateRemove);
+              $scope.addFriend = function(reload) {
+                    User.r.addFriend({ id: $scope.user.id }, {}, function(data) {
+                        User.friends.push(data.friend);
+                        compileManageFriendTemplate($compile, $element, $scope, templateRemove);
 
-					if (reload === true)
-						$route.reload();
-				})
-			};
+                        if (reload === true)
+                            $route.reload();
+                    })
+              };
 
-      $scope.deleteFriend = function(reload) {
-				User.r.deleteFriend({ id: $scope.user.id }, {}, function() {
-					User.friends.splice(User.friends.indexOf($scope.user), 1);
-					compileManageFriendTemplate($compile, $element, $scope, templateAdd);
+              $scope.deleteFriend = function(reload) {
+                    User.r.deleteFriend({ id: $scope.user.id }, {}, function() {
+                        User.friends.splice(User.friends.indexOf($scope.user), 1);
+                        compileManageFriendTemplate($compile, $element, $scope, templateAdd);
 
-					if (reload === true)
-						$route.reload();
-				})
-			};
-		}
-	};
+                        if (reload === true)
+                            $route.reload();
+                    })
+              };
+        }
+    };
 }]);

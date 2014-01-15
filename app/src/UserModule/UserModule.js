@@ -1,5 +1,6 @@
 angular.module('UserModule', [
-	'ngResource'
+	'ngResource',
+    'FileModule'
 ])
 .config(['$routeProvider', function($routeProvider) {
   var isLoginRoute = function(route) {
@@ -24,6 +25,8 @@ angular.module('UserModule', [
 
   var resolve = {
     "UserLoading": function($q, $rootScope, $route, $location, User) {
+      $rootScope.breadcrumb = '';
+
       if (User.isLogged())
         return ;
 
@@ -89,6 +92,14 @@ angular.module('UserModule', [
       templateUrl: "app/src/UserModule/Views/Profile/profile.html",
       _access_: {
         _userAllowed_: true
+      },
+      resolve: resolve
+    }).
+    when("/profile/:login/public/:FSystemId", {
+      controller: "ProfileController",
+      templateUrl: "app/src/UserModule/Views/Profile/profile.html",
+      _access_: {
+          _userAllowed_: true
       },
       resolve: resolve
     }).

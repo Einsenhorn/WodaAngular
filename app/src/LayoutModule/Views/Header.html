@@ -1,7 +1,9 @@
 <div ng-controller="HeaderController">
   <div ng-if="show">
     <div id="header">
-      <div id="logo"></div>
+     <a ng-href="#/">
+         <div id="logo"></div>
+     </a>
      <a user-logout>
         <div id="user" ng-controller="AccountController">
           <div id="userImg"></div>
@@ -43,6 +45,9 @@
         </a>
         <a ng-href="#/friends">
           <li ng-class="(currentPage == 'friends') ? 'active' : ''">Friends</li>
+        </a>
+        <a ng-if="1 == 1" ng-href="#/admin/users">
+          <li ng-class="(currentPage == 'admin') ? 'active' : ''">Admin</li>
         </a>
       </ul>
     </div>

@@ -19,6 +19,8 @@ angular.module('LayoutModule')
 			return 'downloaded';
 		if (path.indexOf('friends') != -1)
 			return 'friends';
+        if (path.indexOf('admin') != -1)
+            return 'admin';
 		return 'home';
 	}
 
@@ -26,10 +28,6 @@ angular.module('LayoutModule')
 		// angular.element('.active').removeClass('active');
 		// angular.element('a[href="#'+ $location.path() +'"]').addClass('active');
 		$scope.currentPage = getCurrentPage($location.path());
-
-		console.log($scope.currentPage);
-		console.log($location.path());
-
 	});
 
 

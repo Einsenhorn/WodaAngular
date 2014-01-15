@@ -16,7 +16,7 @@ angular.module('UserModule').factory('User', ['$q', '$resource', 'WodaConfigurat
 					withCredentials: true,
 					headers: headers
 				}, read: {
-					url: WodaConfiguration.host + '/users',
+					url: WodaConfiguration.host + '/users/:user',
 					method:'GET',
 					withCredentials: true,
 					headers: headers
