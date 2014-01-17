@@ -70,6 +70,11 @@ div#header {
 	position:relative;
 }
 
+div#footer {
+	height: 100px;
+	background-color:white;
+}
+
 div#logo {
 	width:154px;
 	height:44px;
@@ -188,7 +193,7 @@ div#menubar {
 	font-size: 18px;
 	font-weight: normal;
 	color: #2c2c2c;
-	padding-left: 60px;
+	padding-left: 40px;
 }
 
 div#menubar ul {
@@ -201,7 +206,7 @@ div#menubar li {
 	padding-top: 15px;
 	height: 35px;
 	float: left;
-	margin-right: 50px;
+	margin-right: 40px;
 }
 
 div#menubar li:hover {
@@ -260,7 +265,7 @@ table td {
 }
 
 div#content table .files {
-	width:50%;
+	width:35%;
 	text-align:left;
 }
 
@@ -305,14 +310,6 @@ table .icon-file {
 	background-image: url("../img/btn_download_highlight.png");
 }
 
-.btn-fav {
-	background-image: url("../img/btn_fav_normal.png");
-}
-
-.btn-fav:hover {
-	background-image: url("../img/btn_fav_highlight.png");
-}
-
 .btn-links {
 	background-image: url("../img/btn_links_normal.png");
 }
@@ -329,29 +326,58 @@ table .icon-file {
 	background-image: url("../img/btn_move_highlight.png");
 }
 
-.btn-unfav {
-	background-image: url("../img/btn_no_fav_normal.png");
-}
-
-.btn-unfav:hover {
-	background-image: url("../img/btn_no_fav_highlight.png");
-}
-
-.btn-unpublic {
-	background-image: url("../img/btn_not_public_normal.png");
-}
-
-.btn-unpublic:hover {
-	background-image: url("../img/btn_not_public_highlight.png");
-}
 
 .btn-public {
-	background-image: url("../img/btn_public_normal.png");
+	background-image: url("../img/ic_public.png");
 }
 
 .btn-public:hover {
-	background-image: url("../img/btn_public_highlight.png");
+	background-image: url("../img/btn_public_normal.png");
 }
+
+.btn-public.active {
+	background-image: url("../img/btn_public_normal.png");
+}
+
+.btn-public.active:hover {
+	background-image: url("../img/btn_not_public_normal.png");
+}
+
+
+.btn-fav {
+	background-image: url("../img/ic_star.png");
+}
+
+.btn-fav:hover {
+	background-image: url("../img/btn_fav_normal.png");
+}
+
+.btn-fav.active {
+	background-image: url("../img/btn_fav_normal.png");
+}
+
+.btn-fav.active:hover {
+	background-image: url("../img/btn_no_fav_normal.png");
+}
+
+
+.btn-transfer{
+	background-image: url("../img/btn_transfer.png");
+}
+
+.btn-transfer:hover {
+	background-image: url("../img/btn_transfer_highlight.png");
+}
+
+.btn-share{
+	background-image: url("../img/btn_share.png");
+}
+
+.btn-share:hover {
+	background-image: url("../img/btn_share_highlight.png");
+}
+
+
 
 .btnclassic {
 	-moz-box-shadow:inset 0px 1px 0px 0px #54a3f7;

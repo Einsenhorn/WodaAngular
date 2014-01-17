@@ -102,5 +102,13 @@ angular.module('FileModule', [
         _userAllowed_: true
       },
       resolve: resolve
+    }).
+    when("/sharedToMe", {
+      controller: "SharedToMeController",
+      templateUrl: "app/src/FileModule/Views/sharedToMe.html",
+      _access_: {
+        _userAllowed_: true
+      },
+      resolve: resolve
     });
 }]);

@@ -1,0 +1,35 @@
+<div class="modal-header">
+	<h3>File sharing for <strong>{{file.name}}</strong></h3>
+</div>
+<form ng-submit="ok(login)">
+    <div class="modal-body" style="text-align:center">
+        <div>
+            <h3>Share to someone :</h3>
+            <input type="text" placeholder="Login" ng-model="login" /> <button ng-click="shareFile(login)" class="btnclassic"> Share file</button>
+            <p style="color:#F00" class="error" ng-if="error">{{error}}</p>
+        </div>
+        <div ng-show="success">
+            <p>{{success}}</p>
+        </div>
+        <h3>This file is shared with :</h3>
+        <div id="content" ng-if="files != {}">
+        <table>
+            <thead>
+                <th>User</th>
+                <th></th>
+            </thead>
+            <tbody>
+                <tr ng-repeat="user in users">
+                    <td style="width:50%;">{{ user.login }}</td>
+                    
+                    <td style="width:50%;"><button class="btnclassic" ng-click="unshareFile(user)">Unshare</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    </div>
+
+    <div class="modal-footer">
+        <button style="width:100px;" class="btn btn-warning" ng-click="cancel()">Close</button>
+    </div>
+</form>

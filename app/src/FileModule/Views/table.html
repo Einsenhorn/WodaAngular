@@ -2,7 +2,7 @@
 	<div ng-if="(root.folders.length + root.files.length == 0) ? true : false">
 		No files.
 	</div>
-
+	
 	<table ng-if="(root.folders.length + root.files.length != 0) ? true : false" style="width:100%" ng-show="!error">
 		<thead>
 		  <tr>
@@ -18,6 +18,8 @@
 		    <td ng-show="show">
 		    	<i class="btn"></i>
 		    	<i class="btn"></i>
+		      	<i class="btn"></i>
+		      	<i class="btn"></i>
 		      <a><i class="btn btn-move"></i></a>
 		      <a ng-click="deleteFSystem(folder)"><i class="btn btn-delete"></i></a>
 		    </td>
@@ -26,27 +28,46 @@
 		      <i class="btn"></i>
 		      <i class="btn"></i>
 		      <i class="btn"></i>
+		      <i class="btn"></i>
+		      <i class="btn"></i>
 		    </td>
 		    <td>{{folder.last_update | date: 'short'}}</td>
-		    <td><a ng-click="publicFSystem(folder)"><i class="btn" ng-class="(folder.public) ? 'btn-unpublic' : 'btn-public'"></i></a> <a ng-click="favoriteFSystem(folder)"><i class="btn" ng-class="(folder.favorite) ? 'btn-unfav' : 'btn-fav'"></i></a></td>
+		    <td><a ng-click="publicFSystem(folder)"><i class="btn btn-public" ng-class="(folder.public) ? 'active' : ''"></i></a> <a ng-click="favoriteFSystem(folder)"><i class="btn btn-fav" ng-class="(folder.favorite) ? 'active' : ''"></i></a></td>
 		  </tr>
 
 		  <tr ng-repeat="file in root.files" ng-mouseenter="show = true" ng-mouseleave="show = false" >
-		    <td class="files"><i class="icon-file"></i> {{file.name}}</td>
-		    <td ng-show="show">
+		    <td class="files">
+		    	<i class="icon-file"></i> {{file.name}}
+		    	<i style="font-size:14px" ng-show="file.owner != null"> (owned by <a ng-href="#/profile/{{file.owner.id}}">{{file.owner.login}}</a>)</i></td>
+		    
+		    <td ng-show="show" ng-if="root.isPublic">
+		      <a><i class="btn"></i></a>
+		      <a><i class="btn"></i></a>
+		      <a><i class="btn"></i></a>
+		      <a ng-click="openSyncFileModal(file)"><i class="btn btn-transfer"></i></a>
+		      <a ng-click="openGetDDLinkModal(file)"><i class="btn btn-links"></i></a>
+		      <a ng-click="getDDL(file)"><i class="btn btn-download"></i></a>
+		    </td>
+		    <td ng-show="show" ng-if="!root.isPublic">
 		      <a><i class="btn btn-move"></i></a>
-		      <a ng-click="alert('dl link')"><i class="btn btn-links"></i></a>
+		      <a ng-click="openSyncFileModal(file)"><i class="btn btn-transfer"></i></a>
+		      <a ng-click="openShareFSystemModal(file)"><i class="btn btn-share"></i></a>
+		      <a ng-click="openGetDDLinkModal(file)"><i class="btn btn-links"></i></a>
 		      <a ng-click="getDDL(file)"><i class="btn btn-download"></i></a>
 		      <a ng-click="deleteFSystem(file)"><i class="btn btn-delete"></i></a>
 		    </td>
+
 		    <td ng-show="!show">
 		      <i class="btn"></i>
 		      <i class="btn"></i>
 		      <i class="btn"></i>
 		      <i class="btn"></i>
+		      <i class="btn"></i>
+		      <i class="btn"></i>
+
 		    </td>
 		    <td>{{file.last_update | date: 'short'}}</td>
-		    <td><a ng-click="publicFSystem(file)"><i class="btn" ng-class="(file.public) ? 'btn-unpublic' : 'btn-public'"></i></a> <a ng-click="favoriteFSystem(file)"><i class="btn" ng-class="(file.favorite) ? 'btn-unfav' : 'btn-fav'"></i></a></td>
+		    <td><a ng-if="!root.isPublic" ng-click="publicFSystem(file)"><i class="btn btn-public" ng-class="(file.public) ? 'active' : ''"></i></a> <a ng-click="favoriteFSystem(file)"><i class="btn btn-fav" ng-class="(file.favorite) ? 'active' : ''"></i></a></td>
 		  </tr>
 		</tbody>
 	</table>

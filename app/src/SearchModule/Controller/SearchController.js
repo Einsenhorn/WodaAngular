@@ -7,6 +7,8 @@ angular.module('SearchModule').controller('SearchController', ['$scope', '$locat
 	$scope.root.folders = [];
 	$scope.root.users = [];
 
+
+
 	$scope.showusers = false;
 
 	function setUpRootFolder(result) {
@@ -52,14 +54,15 @@ angular.module('SearchModule').controller('SearchController', ['$scope', '$locat
 
 	$scope.switchRoot = function(type){
 		$scope.showusers = false;
+		console.log($scope.root.isPublic );
 		switch(type)
 		{
 			case 'private':
-                $scope.private = true;
+				$scope.root.isPublic = false;
 				setUpRootFolder($scope.result.privateFiles);
 				break;
 			case 'public':
-                $scope.private = false;
+				$scope.root.isPublic = true;
 				setUpRootFolder($scope.result.publicFiles);
 				break
 			case 'users':

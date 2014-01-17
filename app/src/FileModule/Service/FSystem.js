@@ -1,5 +1,5 @@
 angular.module('FileModule').factory('FSystem', ['$resource', 'WodaConfiguration', function($resource, WodaConfiguration) {
-	var headers = { 'Content-Type': 'application/json' };
+	var headers = { 'Content-Type': 'application/json', 'X-Requested-With': '' };
 
 	return {
 		r: $resource(WodaConfiguration.host + '/files', {}, {
@@ -76,7 +76,38 @@ angular.module('FileModule').factory('FSystem', ['$resource', 'WodaConfiguration
 				method:'GET',
 				withCredentials: true,
 				headers: headers
-			}
+			},
+			syncPublic: {
+				url: WodaConfiguration.host + '/sync_public/:FSystemId',
+				method: 'POST',
+				withCredentials: true,
+				headers:headers
+			},
+            share: {
+                url: WodaConfiguration.host + '/files/share/:FSystemId',
+                method:'POST',
+                withCredentials: true,
+                headers: headers
+            },
+            unshare: {
+                url: WodaConfiguration.host + '/files/unshare/:FSystemId',
+                method:'POST',
+                withCredentials: true,
+                headers: headers
+            },
+            shared: {
+                url: WodaConfiguration.host + '/files/shared_by_me/:FSystemId',
+                method:'GET',
+                withCredentials: true,
+                headers: headers
+            },
+            sharedToMe: {
+                url: WodaConfiguration.host + '/files/shared_to_me',
+                method:'GET',
+                withCredentials: true,
+                headers: headers
+            },
+
 		})
 	};
 }]);

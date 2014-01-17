@@ -9,6 +9,7 @@ angular.module('LayoutModule')
     $scope.currentPage = getCurrentPage($location.path());
 
 	function getCurrentPage(path) {
+		console.log(path);
 		if (path.indexOf('recent') != -1)
 			return 'recent';
 		if (path.indexOf('favorite') != -1)
@@ -21,6 +22,8 @@ angular.module('LayoutModule')
 			return 'friends';
         if (path.indexOf('admin') != -1)
             return 'admin';
+        if (path.indexOf('sharedToMe') != -1)
+        	return 'sharedToMe';
 		return 'home';
 	}
 
