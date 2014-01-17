@@ -3,6 +3,8 @@ angular.module('FileModule').controller('SharedToMeController', ['$scope', '$roo
 	$scope.root.files = [];
 	$scope.root.folders = [];
 	$scope.root.isPublic = true;
+	$scope.root.isShared = true;
+
 
 	FSystem.r.sharedToMe(function(data) {
 

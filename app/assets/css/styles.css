@@ -51,7 +51,7 @@ body {
 
 a:link {text-decoration:none;color: inherit;}
 a:visited {text-decoration:none;color: inherit;}
-a:hover {text-decoration:none;color: inherit;}
+a:hover {text-decoration:underline;color: inherit;}
 a:active {text-decoration:none;color: inherit;}
 
 div#globalcontainer {
@@ -82,10 +82,11 @@ div#logo {
 }
 
 div#user {
-	right:20px;
-	top:10px;
-	width:200px;
+	right:0px;
+	top:5px;
+	width:220px;
 	position:absolute;
+	line-height: 20px;
 }
 
 div#userImg {
@@ -98,8 +99,9 @@ div#userImg {
 	margin-right:15px;
 }
 
-div#userName {
-	margin-top:17px;
+span#userName {
+	margin-top:0px;
+	font-size: 23px;
 }
 
 div#userMenu {
@@ -206,7 +208,7 @@ div#menubar li {
 	padding-top: 15px;
 	height: 35px;
 	float: left;
-	margin-right: 40px;
+	margin-right: 30px;
 }
 
 div#menubar li:hover {

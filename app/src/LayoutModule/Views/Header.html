@@ -1,19 +1,14 @@
 <div ng-controller="HeaderController">
   <div ng-if="show">
     <div id="header">
-     <a ng-href="#/">
-         <div id="logo"></div>
-     </a>
-     <a user-logout>
-        <div id="user" ng-controller="AccountController">
-          <div id="userImg"></div>
-          <div id="userName">{{User.login}}</div>
-          <div id="userMenu" ng-show="false">
-            <div><i class="btn btn-move"></i> Settings</div>
-            <div><i class="btn btn-move"></i> Log Out</div>
-          </div>
-        </div>
+      <a ng-href="#/">
+          <div id="logo"></div>
       </a>
+      <div id="user" ng-controller="AccountController">
+        <span id="userName"><strong>{{User.login}}</strong></span> <i><br /> 
+        ({{User.used_space | Bytes:1}} of {{User.space | Bytes:1}} used)</i> <br />
+        <span><a user-logout ng-href="">Logout</a></span>
+      </div>
     </div>
     <div id="searchnstuff">
     	<div ng-controller="SearchController">
@@ -47,7 +42,7 @@
           <li ng-class="(currentPage == 'sharedToMe') ? 'active' : ''">Shared With Me</li>
         </a>
         <a ng-href="#/friends">
-          <li ng-class="(currentPage == 'friends') ? 'active' : ''">Friends</li>
+          <li ng-class="(currentPage == 'friends') ? 'active' : ''">Following</li>
         </a>
         <a ng-if="User.admin == true" ng-href="#/admin/users">
           <li ng-class="(currentPage == 'admin') ? 'active' : ''">Admin</li>

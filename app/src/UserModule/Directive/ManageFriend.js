@@ -1,6 +1,6 @@
 angular.module('UserModule').directive('userManageFriend', ['$compile', '$routeParams', '$route', 'User', function($compile, $routeParams, $route, User) {
-	var templateAdd = '<span><a class="btnclassic" ng-click="addFriend(reloadPage)">Add as friend</a></span>',
-			templateRemove = '<span><a class="btnclassic" ng-click="deleteFriend(reloadPage)">Remove this friend</a></span>',
+	var templateAdd = '<span><a class="btnclassic" ng-click="addFriend(reloadPage)">Follow</a></span>',
+		templateRemove = '<span><a class="btnclassic" ng-click="deleteFriend(reloadPage)">Unfollow</a></span>',
 			compileManageFriendTemplate = function($compile, $element, $scope, template) {
 				$element.html(template);
       	$compile($element.contents())($scope.$new());

@@ -1,8 +1,6 @@
 angular.module('FileModule').controller('ListController', ['$scope', '$rootScope', 'FSystem', '$modal', function($scope, $rootScope, FSystem, $modal) {
 
 	$scope.$watch('$scope.root.isPublic', function() {
-		console.log('hey');
-
 		if (!$scope.root.isPublic || typeof $scope.root.isPublic == 'undefined')
 		{
 				$scope.root.isPublic = false;
@@ -11,16 +9,31 @@ angular.module('FileModule').controller('ListController', ['$scope', '$rootScope
 		{
 			$scope.root.isPublic = true;
 		}
-		console.log($scope.root.isPublic);
+	});
 
-		$rootScope.$on('FSystem.fileAdd', function (event, file) {
+	$rootScope.$on('FSystem.fileAdd', function (event, file) {
 			if (file.folder)
 				$scope.root.folders.push(file);
 			else
 				$scope.root.files.push(file);
 		});
+
+	
+
+	$scope.$watch('$scope.root.isShared', function() {
+		if (!$scope.root.isShared || typeof $scope.root.isShared == 'undefined')
+		{
+				$scope.root.isShared = false;
+		}
+		else
+		{
+			$scope.root.isShared = true;
+		}
+		console.log('hey');
+		console.log($scope.root.isShared);
 	});
 	
+
 
 	$scope.publicFSystem = function(fsystem) {
 		console.log(fsystem);
@@ -93,8 +106,6 @@ angular.module('FileModule').controller('ListController', ['$scope', '$rootScope
     };
 }])
 .controller('SyncFileModalController', ['$modalInstance', '$scope', 'FSystem', 'file', function ($modalInstance, $scope, FSystem, file){
-
-	console.log(file);
 	$scope.file = file;
 
 	$scope.syncFile = function(file, isLink) {
@@ -153,19 +164,31 @@ angular.module('FileModule').controller('ListController', ['$scope', '$rootScope
             $scope.error = 'Error: ' + data.message;
         });
     }
-    
-    // if (login) {
-    //         FSystem.r.share({ FSystemId: FSystemID }, { login: login }, function(data) {
-    //             $scope.success = 'Success: `' + data.file.name + '` shared';
-    //             setTimeout(function() { $modalInstance.dismiss('ok'); }, 2000);
-    //         }, function() {
-    //             $scope.error = 'Error';
-    //         })
-    //     } else {
-    //         $scope.error = 'login can not be null.';
-    //     }
 
     $scope.cancel = function () {
         $modalInstance.dismiss('cancel');
     };
-}]);;
+}])
+.filter('charlimit', function () {
+        return function (input, chars, breakOnWord) {
+            if (isNaN(chars)) return input;
+            if (chars <= 0) return '';
+            if (input && input.length >= chars) {
+                input = input.substring(0, chars);
+
+                if (!breakOnWord) {
+                    var lastspace = input.lastIndexOf(' ');
+                    //get last space
+                    if (lastspace !== -1) {
+                        input = input.substr(0, lastspace);
+                    }
+                }else{
+                    while(input.charAt(input.length-1) == ' '){
+                        input = input.substr(0, input.length -1);
+                    }
+                }
+                return input + '...';
+            }
+            return input;
+        };
+    });
