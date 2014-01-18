@@ -56,8 +56,9 @@
 		      <i class="btn"></i>
 		      <i class="btn"></i>
 		      <i class="btn"></i>
+		      <i class="btn"></i>
 		      <i ng-if="!root.isShared" class="btn"></i>
-		      <a ng-click="openSyncFileModal(file)"><i class="btn btn-transfer"></i></a>
+		      <a ng-if="!root.isShared" ng-click="openSyncFileModal(file)"><i class="btn btn-transfer"></i></a>
 		      <a ng-click="openGetDDLinkModal(file)"><i class="btn btn-links"></i></a>
 		      <a ng-click="getDDL(file)"><i class="btn btn-download"></i></a>
 		      <a ng-if="root.isShared" ng-click="deleteFSystem(file)"><i class="btn btn-delete"></i></a>
