@@ -7,7 +7,7 @@
       <div id="user" ng-controller="AccountController">
         <span id="userName"><strong>{{User.login}}</strong></span> <i><br /> 
         ({{User.used_space | Bytes:1}} of {{User.space | Bytes:1}} used)</i> <br />
-        <span><a user-logout ng-href="">Logout</a></span>
+        <span><a style="cursor:pointer" user-logout ng-href="">Logout</a></span>
       </div>
     </div>
     <div id="searchnstuff">
@@ -19,7 +19,6 @@
         <div id="newFolder" ng-click="openCreateFolderModal()"></div>
         <div id="uploadFile" ng-click="openUploadModal()"></div>
       </div>
-
     </div>
     <div id="menubar">
       <ul>
