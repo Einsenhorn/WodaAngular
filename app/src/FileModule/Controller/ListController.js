@@ -167,6 +167,7 @@ angular.module('FileModule').controller('ListController', ['$scope', '$rootScope
 }]).
 controller('moveFSystemController', ['$modalInstance', '$scope', '$route', 'FSystem', 'fsystem', function ($modalInstance, $scope, $route, FSystem, f) {
     $scope.fsystem = f;
+    $scope.root = [];
     $scope.parent = {};
     $scope.cfolder = {};
     $scope.folder = {};
@@ -174,6 +175,7 @@ controller('moveFSystemController', ['$modalInstance', '$scope', '$route', 'FSys
     FSystem.r.getList(function(data) {
         FSystem.r.breadcrumb({ FSystemId: f.id }, function(d) {
             $scope.parent = d.breadcrumb[d.breadcrumb.length - 2];
+            $scope.root = data.folder;
             $scope.cfolder = data.folder;
             $scope.folder = data.folder;
         });
@@ -181,6 +183,10 @@ controller('moveFSystemController', ['$modalInstance', '$scope', '$route', 'FSys
 
     $scope.selectFolder = function (fsystem) {
         FSystem.r.getList({ FSystemId: fsystem ? fsystem.id : '' }, function(data) {
+            if (!fsystem) {
+                fsystem = $scope.root;
+            }
+
             FSystem.r.breadcrumb({ FSystemId: fsystem ? fsystem.id : '' }, function(d) {
                 $scope.parent = d.breadcrumb[d.breadcrumb.length - 2];
                 $scope.folder = fsystem;
@@ -196,7 +202,8 @@ controller('moveFSystemController', ['$modalInstance', '$scope', '$route', 'FSys
     $scope.moveFSystem = function () {
         if ($scope.parent && $scope.parent.hasOwnProperty('id')) {
             FSystem.r.move({ fileId: f.id, sourceId: $scope.parent.id, destinationId: $scope.folder.id }, {}, function() {
-                $route.reload();
+                console.debug('-- xxx --');
+                //$route.reload();
                 $modalInstance.dismiss('ok');
             });
         }

@@ -12,11 +12,10 @@ angular.module('AdminModule').controller('UserController', ['$scope', '$rootScop
         Admin.r.deleteUser({ user: user.id }, {}, function() {
                 $scope.users.splice(index, 1);
             }, function() {
-
         });
     };
 
     $scope.updateUserSpace = function(user) {
-        Admin.r.UpdateSpaceUser({ user: user.id, newSpace: user.space });
+        Admin.r.UpdateSpaceUser({ user: user.id, newSpace: user.space }, {});
     };
 }]);
