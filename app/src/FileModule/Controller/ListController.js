@@ -187,11 +187,8 @@ controller('moveFSystemController', ['$modalInstance', '$scope', '$route', 'FSys
                 fsystem = $scope.root;
             }
 
-            FSystem.r.breadcrumb({ FSystemId: fsystem ? fsystem.id : '' }, function(d) {
-                $scope.parent = d.breadcrumb[d.breadcrumb.length - 2];
-                $scope.folder = fsystem;
-                $scope.cfolder = data.folder;
-            });
+            $scope.folder = fsystem;
+            $scope.cfolder = data.folder;
         });
     };
 
@@ -201,6 +198,7 @@ controller('moveFSystemController', ['$modalInstance', '$scope', '$route', 'FSys
 
     $scope.moveFSystem = function () {
         if ($scope.parent && $scope.parent.hasOwnProperty('id')) {
+            console.debug('move: ' + $scope.parent.name + '/' + f.name + ' into ' + $scope.folder.name);
             FSystem.r.move({ fileId: f.id, sourceId: $scope.parent.id, destinationId: $scope.folder.id }, {}, function() {
                 $route.reload();
                 $modalInstance.dismiss('ok');
