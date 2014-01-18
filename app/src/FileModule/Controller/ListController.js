@@ -28,8 +28,6 @@ angular.module('FileModule').controller('ListController', ['$scope', '$rootScope
 		}
 	});
 	
-
-
 	$scope.publicFSystem = function(fsystem) {
 		console.log(fsystem);
 		FSystem.r.public({ FSystemId: fsystem.id }, { public: (fsystem.public) ? 'false' : 'true' }, function(data) {
@@ -201,10 +199,6 @@ controller('moveFSystemController', ['$modalInstance', '$scope', '$route', 'FSys
     };
 
     $scope.moveFSystem = function () {
-        console.debug($scope.fsystem);
-        console.debug($scope.folder);
-        console.debug($scope.parent);
-
         if ($scope.parent && $scope.parent.hasOwnProperty('id')) {
             FSystem.r.move({ fileId: f.id, sourceId: $scope.parent.id, destinationId: $scope.folder.id }, {}, function() {
                 $route.reload();

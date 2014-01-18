@@ -111,4 +111,6 @@ angular.module('FileModule', [
       },
       resolve: resolve
     });
+}]).run(['$rootScope', function($rootScope) {
+    $rootScope.breadcrumb = '';
 }]);
