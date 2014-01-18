@@ -10,6 +10,7 @@ You are about to synchronize a public file. You can add it in your home folder a
 
 <button class="btnclassic" ng-click="syncFile(file, 'true')">Sync as a link</button> <button class="btnclassic" ng-click="syncFile(file, 'false')">Copy file to my folder</button>
 
+<div class="error" ng-if="error">Error : {{error}}</div>
 
 </div>
 <div class="modal-footer">

@@ -19,16 +19,29 @@ angular.module('LayoutModule')
 	};
 
 }])
-.controller('UploadModalController', ['$modalInstance', '$scope', 'FileTransfer', '$rootScope', function ($modalInstance, $scope, FileTransfer, $rootScope){
-
+.controller('UploadModalController', ['$modalInstance', '$scope', 'FileTransfer', '$rootScope', 'User', function ($modalInstance, $scope, FileTransfer, $rootScope, User){
 	$scope.files = FileTransfer.files;
 	$scope.path = $rootScope.breadcrumb.substr(1);
+
+	console.log($scope.files);
+
+	$scope.$watch('User', function(){
+		if (!User.isLogged())
+			FileTransfer.files = [];
+	});
+
+	$scope.$watch('FileTransfer', function(){
+		console.log('?');
+		console.log(FileTransfer.files);	
+		$scope.files = FileTransfer.files;
+	});
 
 	$scope.startUpload = function(file) {
 		var progress = {};
 
 		transfer = FileTransfer.upload(file, progress);
 
+		console.log(file);
 		if (file)
 			FileTransfer.files.push(progress);
 
