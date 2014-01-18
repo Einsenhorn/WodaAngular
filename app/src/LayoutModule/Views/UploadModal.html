@@ -2,12 +2,14 @@
 	<h3>File upload :</h3>
 </div>
 <div class="modal-body">
+
 	<div id="uploadform">
 		<file ng-model="uploadFile"></file>
-		<button class="btnclassic" ng-click="startUpload(uploadFile)">Upload File</button>
+		<button class="btnclassic" ng-click="startUpload(uploadFile)">Upload File</button> <br/>
+		<i>Current upload folder : {{path}}</i>
 	</div>
 
-	<div id="content" ng-if="files != {}">
+	<div id="content" ng-if="files">
 		<table>
 			<thead>
 				<th>Filename</th>

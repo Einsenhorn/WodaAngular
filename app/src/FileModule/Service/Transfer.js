@@ -116,9 +116,10 @@ angular.module( 'FileModule' )
 
 					descriptor.partSize = WodaConfiguration.partSize;
 
+					var filename = $rootScope.breadcrumb.substr(1)+file.name;
 					return computeSHA256( descriptor ).then( function ( hash ) {
 						return $http.put( WodaConfiguration.host + '/sync', {
-							filename : file.name,
+							filename : filename,
 							content_hash : hash,
 							size : descriptor.file.size.toString( )
 						}, {
