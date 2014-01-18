@@ -34,7 +34,8 @@
 	<script src="app/src/FileModule/Service/Transfer.js"></script>
 
 	<script src="app/src/LayoutModule/LayoutModule.js"></script>
-	<script src="app/src/LayoutModule/Controller/HeaderController.js"></script>
+    <script src="app/src/LayoutModule/Controller/HeaderController.js"></script>
+    <script src="app/src/LayoutModule/Controller/FooterController.js"></script>
 	<script src="app/src/LayoutModule/Controller/FileModalsController.js"></script>
 
 	<script src="app/src/SearchModule/SearchModule.js"></script>
@@ -58,7 +59,7 @@
 	<div id="globalcontainer" >
 		<div ng-include="'app/src/LayoutModule/Views/Header.html'"></div>
 		<div ng-view></div>
-		<div id="footer"></div>
+        <div ng-include="'app/src/LayoutModule/Views/Footer.html'"></div>
 	</div>
 
 </body>
