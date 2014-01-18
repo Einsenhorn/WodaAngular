@@ -510,7 +510,7 @@ div#login {
 	background-color: #ffffff;
 	height: 36px;
 	width: 100%;
-	font-size: 100px;
+	font-size: 100px;
 	text-align: center;
 	line-height: 30px;
 }
@@ -518,7 +518,7 @@ div#login {
 div#uploadform {
 	width:100%;
 	text-align: center;
-        margin-bottom: 20px;
+    margin-bottom: 20px;
 }
 
 #uploadform button {
@@ -534,3 +534,15 @@ span.thin {
 .text::-moz-placeholder { font-size: 20px; }
 .text:-ms-input-placeholder { font-size: 20px; }
 input .text:-moz-placeholder { font-size: 20px; }
+
+.error {
+    color: #D8000C;
+    border: 1px solid;
+    margin: 10px 0px;
+    padding:15px 10px 15px 50px;
+    background-color: #FFBABA;
+    background-repeat: no-repeat;
+    background-position: 10px center;-moz-border-radius:.5em;
+    -webkit-border-radius:.5em;
+    border-radius:.5em;
+}
