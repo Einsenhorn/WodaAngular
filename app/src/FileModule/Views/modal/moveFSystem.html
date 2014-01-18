@@ -1,0 +1,19 @@
+<div class="modal-header">
+	<h3>Move file `{{fsystem.name}}`</h3>
+</div>
+<div class="modal-body">
+    <p style="text-align:center;"><i>`{{fsystem.name}}`</i> into <i>`{{cfolder.name}}`</i></p>
+
+    <div style="text-align:center">
+        <select style="width:500px;height:100%;" multiple>
+            <option ng-repeat="folder in cfolder.folders" ng-if="fsystem.id != folder.id" ng-click="selectFolder(folder)" />{{folder.name}}</select>
+        </select>
+    </div>
+    <p>
+        <b style="padding-left:40px;cursor:pointer" ng-click="selectFolder()">back to <i>root</i></b>
+    </p>
+</div>
+<div class="modal-footer">
+	<button style="width:100px;" class="btn btn-primary" ng-click="moveFSystem()">Move</button>
+	<button style="width:100px;" class="btn btn-warning" ng-click="cancel()">Cancel</button>
+</div>

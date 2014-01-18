@@ -41,6 +41,12 @@ angular.module('FileModule').factory('FSystem', ['$resource', 'WodaConfiguration
 				withCredentials: true,
 				headers: headers
 			},
+            move: {
+                url: WodaConfiguration.host + '/move/:fileId/from/:sourceId/into/:destinationId',
+                method:'POST',
+                withCredentials: true,
+                headers: headers
+            },
 			public: {
 				url: WodaConfiguration.host + '/files/public/:FSystemId',
 				method:'POST',

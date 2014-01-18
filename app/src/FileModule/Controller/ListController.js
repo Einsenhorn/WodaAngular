@@ -104,6 +104,14 @@ angular.module('FileModule').controller('ListController', ['$scope', '$rootScope
             resolve: { 'file': function() { return fsystem; } }
         });
     };
+
+    $scope.openMoveFSystemModal = function (fsystem) {
+        $modal.open({
+            templateUrl: 'app/src/FileModule/Views/modal/moveFSystem.html',
+            controller: 'moveFSystemController',
+            resolve: { 'fsystem': function() { return fsystem; } }
+        });
+    };
 }])
 .controller('SyncFileModalController', ['$modalInstance', '$scope', 'FSystem', 'file', function ($modalInstance, $scope, FSystem, file){
 	$scope.file = file;
@@ -168,27 +176,68 @@ angular.module('FileModule').controller('ListController', ['$scope', '$rootScope
     $scope.cancel = function () {
         $modalInstance.dismiss('cancel');
     };
-}])
-.filter('charlimit', function () {
-        return function (input, chars, breakOnWord) {
-            if (isNaN(chars)) return input;
-            if (chars <= 0) return '';
-            if (input && input.length >= chars) {
-                input = input.substring(0, chars);
+}]).
+controller('moveFSystemController', ['$modalInstance', '$scope', '$route', 'FSystem', 'fsystem', function ($modalInstance, $scope, $route, FSystem, f) {
+    $scope.fsystem = f;
+    $scope.parent = {};
+    $scope.cfolder = {};
+    $scope.folder = {};
 
-                if (!breakOnWord) {
-                    var lastspace = input.lastIndexOf(' ');
-                    //get last space
-                    if (lastspace !== -1) {
-                        input = input.substr(0, lastspace);
-                    }
-                }else{
-                    while(input.charAt(input.length-1) == ' '){
-                        input = input.substr(0, input.length -1);
-                    }
-                }
-                return input + '...';
-            }
-            return input;
-        };
+    FSystem.r.getList(function(data) {
+        FSystem.r.breadcrumb({ FSystemId: f.id }, function(d) {
+            $scope.parent = d.breadcrumb[d.breadcrumb.length - 2];
+            $scope.cfolder = data.folder;
+            $scope.folder = data.folder;
+        });
     });
+
+    $scope.selectFolder = function (fsystem) {
+        FSystem.r.getList({ FSystemId: fsystem ? fsystem.id : '' }, function(data) {
+            FSystem.r.breadcrumb({ FSystemId: fsystem ? fsystem.id : '' }, function(d) {
+                $scope.parent = d.breadcrumb[d.breadcrumb.length - 2];
+                $scope.folder = fsystem;
+                $scope.cfolder = data.folder;
+            });
+        });
+    };
+
+    $scope.cancel = function () {
+        $modalInstance.dismiss('cancel');
+    };
+
+    $scope.moveFSystem = function () {
+        console.debug($scope.fsystem);
+        console.debug($scope.folder);
+        console.debug($scope.parent);
+
+        if ($scope.parent && $scope.parent.hasOwnProperty('id')) {
+            FSystem.r.move({ fileId: f.id, sourceId: $scope.parent.id, destinationId: $scope.folder.id }, {}, function() {
+                $route.reload();
+                $modalInstance.dismiss('ok');
+            });
+        }
+    };
+}]).
+filter('charlimit', function () {
+    return function (input, chars, breakOnWord) {
+        if (isNaN(chars)) return input;
+        if (chars <= 0) return '';
+        if (input && input.length >= chars) {
+            input = input.substring(0, chars);
+
+            if (!breakOnWord) {
+                var lastspace = input.lastIndexOf(' ');
+                //get last space
+                if (lastspace !== -1) {
+                    input = input.substr(0, lastspace);
+                }
+            }else{
+                while(input.charAt(input.length-1) == ' '){
+                    input = input.substr(0, input.length -1);
+                }
+            }
+            return input + '...';
+        }
+        return input;
+    };
+});

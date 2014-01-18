@@ -20,11 +20,11 @@
 		    	<i style="font-size:14px" ng-show="folder.owner"> (owned by <a ng-href="#/profile/{{folder.owner.id}}">{{folder.owner.login}}</a>)</i>
 		    </td>
 		    <td ng-show="show">
-		    	<i class="btn"></i>
-		    	<i class="btn"></i>
-		      	<i class="btn"></i>
-		      	<i class="btn"></i>
-		      <a><i class="btn btn-move"></i></a>
+              <i class="btn"></i>
+		      <i class="btn"></i>
+		      <i class="btn"></i>
+		      <i class="btn"></i>
+              <a ng-click="openMoveFSystemModal(folder)"><i class="btn btn-move"></i></a>
 		      <a ng-click="deleteFSystem(folder)"><i class="btn btn-delete"></i></a>
 		    </td>
 		    <td ng-show="!show">
@@ -60,7 +60,7 @@
 		    <td ng-show="show" ng-if="!root.isPublic">
 		      <i class="btn"></i>
 		      <i ng-if="file.owner" class="btn"></i>
-		      <a><i class="btn btn-move"></i></a>
+              <a ng-click="openMoveFSystemModal(file)"><i class="btn btn-move"></i></a>
 		      <a ng-if="!file.owner" ng-click="openShareFSystemModal(file)"><i class="btn btn-share"></i></a>
 		      <a ng-click="openGetDDLinkModal(file)"><i class="btn btn-links"></i></a>
 		      <a ng-click="getDDL(file)"><i class="btn btn-download"></i></a>
