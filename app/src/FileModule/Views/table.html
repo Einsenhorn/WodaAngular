@@ -24,10 +24,13 @@
 		      <i class="btn"></i>
 		      <i class="btn"></i>
 		      <i class="btn"></i>
+		      <i class="btn"></i>
+		      <i ng-if="!showMove" class="btn"></i>
               <a ng-if="showMove" ng-click="openMoveFSystemModal(folder)"><i class="btn btn-move"></i></a>
 		      <a ng-click="deleteFSystem(folder)"><i class="btn btn-delete"></i></a>
 		    </td>
 		    <td ng-show="!show">
+		      <i class="btn"></i>
 		      <i class="btn"></i>
 		      <i class="btn"></i>
 		      <i class="btn"></i>
@@ -51,15 +54,19 @@
 		    
 		    <td ng-show="show" ng-if="root.isPublic">
 		      <i class="btn"></i>
-		      <a><i class="btn"></i></a>
-		      <a><i class="btn"></i></a>
+		      <i class="btn"></i>
+		      <i class="btn"></i>
+		      <i ng-if="!root.isShared" class="btn"></i>
 		      <a ng-click="openSyncFileModal(file)"><i class="btn btn-transfer"></i></a>
 		      <a ng-click="openGetDDLinkModal(file)"><i class="btn btn-links"></i></a>
 		      <a ng-click="getDDL(file)"><i class="btn btn-download"></i></a>
+		      <a ng-if="root.isShared" ng-click="deleteFSystem(file)"><i class="btn btn-delete"></i></a>
 		    </td>
 		    <td ng-show="show" ng-if="!root.isPublic">
 		      <i class="btn"></i>
+		      <i class="btn"></i>
 		      <i ng-if="file.owner" class="btn"></i>
+		      <a ng-if="!showMove"><i class="btn"></i></a>
               <a ng-if="showMove" ng-click="openMoveFSystemModal(file)"><i class="btn btn-move"></i></a>
 		      <a ng-if="!file.owner" ng-click="openShareFSystemModal(file)"><i class="btn btn-share"></i></a>
 		      <a ng-click="openGetDDLinkModal(file)"><i class="btn btn-links"></i></a>
