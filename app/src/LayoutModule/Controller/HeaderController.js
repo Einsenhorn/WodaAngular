@@ -1,5 +1,4 @@
-angular.module('LayoutModule')
-.controller('HeaderController', ['$scope', '$rootScope', 'User', '$location', '$modal', 'User', function($scope, $rootScope, User, $location, $modal, User) {
+angular.module('LayoutModule').controller('HeaderController', ['$scope', '$rootScope', '$location', '$modal', 'User', function($scope, $rootScope, $location, $modal, User) {
     $scope.show = false;
 
     $rootScope.$watch("User", function (event, next, current) {
@@ -70,4 +69,4 @@ angular.module('LayoutModule')
 			number = Math.floor(Math.log(bytes) / Math.log(1024));
 		return (bytes / Math.pow(1024, Math.floor(number))).toFixed(precision) +  ' ' + units[number];
 	}
-});;
+});
