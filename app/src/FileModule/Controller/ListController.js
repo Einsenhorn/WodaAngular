@@ -212,9 +212,8 @@ controller('moveFSystemController', ['$modalInstance', '$scope', '$route', 'FSys
 
     $scope.moveFSystem = function () {
         if ($scope.parent && $scope.parent.hasOwnProperty('id')) {
-            console.debug('move: ' + $scope.parent.name + '/' + f.name + ' into ' + $scope.folder.name);
             FSystem.r.move({ fileId: f.id, sourceId: $scope.parent.id, destinationId: $scope.folder.id }, {}, function() {
-                // $route.reload();
+                $route.reload();
                 $modalInstance.dismiss('ok');
             });
         }
