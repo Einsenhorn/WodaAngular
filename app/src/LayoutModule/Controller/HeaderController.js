@@ -1,8 +1,10 @@
-angular.module('LayoutModule').controller('HeaderController', ['$scope', '$rootScope', '$location', '$modal', 'User', function($scope, $rootScope, $location, $modal, User) {
+angular.module('LayoutModule')
+.controller('HeaderController', ['$scope', '$rootScope', 'User', '$location', '$modal', 'User', 'FileTransfer', function($scope, $rootScope, User, $location, $modal, User, FileTransfer) {
     $scope.show = false;
 
     $rootScope.$watch("User", function (event, next, current) {
-        $scope.show = User.isLogged() ? true : false;
+        $scope.show = User.isLogged();
+        FileTransfer.files = [];
     });
 
     $scope.currentPage = getCurrentPage($location.path());
@@ -29,6 +31,7 @@ angular.module('LayoutModule').controller('HeaderController', ['$scope', '$rootS
 		// angular.element('.active').removeClass('active');
 		// angular.element('a[href="#'+ $location.path() +'"]').addClass('active');
 		$scope.currentPage = getCurrentPage($location.path());
+		$rootScope.breadcrumb = '//';
 	});
 
 
@@ -69,4 +72,4 @@ angular.module('LayoutModule').controller('HeaderController', ['$scope', '$rootS
 			number = Math.floor(Math.log(bytes) / Math.log(1024));
 		return (bytes / Math.pow(1024, Math.floor(number))).toFixed(precision) +  ' ' + units[number];
 	}
-});
+});;

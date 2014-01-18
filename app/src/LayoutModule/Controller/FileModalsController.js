@@ -25,16 +25,12 @@ angular.module('LayoutModule')
 	$scope.files = FileTransfer.files;
 	$scope.path = $rootScope.breadcrumb.substr(1);
 
-	console.log($scope.files);
-
 	$scope.$watch('User', function(){
 		if (!User.isLogged())
 			FileTransfer.files = [];
 	});
 
 	$scope.$watch('FileTransfer', function(){
-		console.log('?');
-		console.log(FileTransfer.files);	
 		$scope.files = FileTransfer.files;
 	});
 
@@ -43,7 +39,6 @@ angular.module('LayoutModule')
 
 		transfer = FileTransfer.upload(file, progress);
 
-		console.log(file);
 		if (file)
 			FileTransfer.files.push(progress);
 
