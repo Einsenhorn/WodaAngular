@@ -12,7 +12,7 @@
         <tr ng-repeat="user in users">
             <td><a href="">{{user.login}}</a></td>
             <td><input ng-blur="updateUserSpace(user)" ng-model="user.space" style="text-align:center" type="text"/></td>
-            <td><span ng-click="deleteUser(user, $index)">X</span></td>
+            <td><a ng-click="deleteUser(user, $index)"><i class="btn btn-delete"></i></a></td>
         </tr>
         </tbody>
     </table>

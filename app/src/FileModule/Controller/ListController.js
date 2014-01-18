@@ -172,10 +172,10 @@ angular.module('FileModule').controller('ListController', ['$scope', '$rootScope
 }]).
 controller('moveFSystemController', ['$modalInstance', '$scope', '$route', 'FSystem', 'fsystem', function ($modalInstance, $scope, $route, FSystem, f) {
     $scope.fsystem = f;
+    $scope.root = {};
     $scope.parent = {};
     $scope.cfolder = {};
     $scope.folder = {};
-    $scope.root = {};
 
     FSystem.r.getList(function(data) {
         FSystem.r.breadcrumb({ FSystemId: f.id }, function(d) {
