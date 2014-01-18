@@ -167,7 +167,7 @@ angular.module('FileModule').controller('ListController', ['$scope', '$rootScope
 }]).
 controller('moveFSystemController', ['$modalInstance', '$scope', '$route', 'FSystem', 'fsystem', function ($modalInstance, $scope, $route, FSystem, f) {
     $scope.fsystem = f;
-    $scope.root = [];
+    $scope.root = {};
     $scope.parent = {};
     $scope.cfolder = {};
     $scope.folder = {};
