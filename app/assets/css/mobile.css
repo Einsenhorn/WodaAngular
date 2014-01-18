@@ -1,0 +1,15 @@
+.modal-dialog {
+    width: 100%   !important;
+    margin-top: 0 !important;
+}
+
+.modal-content {
+    border-radius: 0 !important;
+    border: 0        !important;
+    height: 100%     !important;
+}
+
+#login {
+    margin-top: 0 !important;
+    top: 0        !important;
+}
