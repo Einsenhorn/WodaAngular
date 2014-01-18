@@ -14,7 +14,7 @@
 </table> -->
 <div id="content">
 
-	<table style="width:100%">
+	<table style="width:100%" ng-if="friends.length > 0">
 		<thead>
 		  <tr>
 			<th class="files">USERS</th>
@@ -28,5 +28,9 @@
 			</tr>
 		</tbody>
 	</table>
-	
+	<div ng-if="friends.length == 0">
+		You are not following anyone.
+	</div>
+
+
 </div>
