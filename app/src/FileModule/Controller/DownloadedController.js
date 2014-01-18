@@ -32,8 +32,6 @@ angular.module('FileModule').controller('DownloadedController', ['$scope', '$roo
 	$scope.getDDL = function(fsystem) {
 		FSystem.r.getDDL({ FSystemId: fsystem.id }, function(data) {
 			window.location = data.link;
-			console.debug(data.link);
-			//alert(data.link);
 		});
 	}
 }]);

@@ -29,7 +29,6 @@ angular.module('FileModule').controller('ListController', ['$scope', '$rootScope
 	});
 	
 	$scope.publicFSystem = function(fsystem) {
-		console.log(fsystem);
 		FSystem.r.public({ FSystemId: fsystem.id }, { public: (fsystem.public) ? 'false' : 'true' }, function(data) {
 			if (fsystem.hasOwnProperty("folder") && fsystem.folder === true) {
 				$scope.root.folders[$scope.root.folders.indexOf(fsystem)] = data.file;
@@ -62,8 +61,6 @@ angular.module('FileModule').controller('ListController', ['$scope', '$rootScope
 	$scope.getDDL = function(fsystem) {
 		FSystem.r.getDDL({ FSystemId: fsystem.id }, function(data) {
 			window.location = data.link;
-			console.debug(data.link);
-			//alert(data.link);
 		});
 	}
 
@@ -110,9 +107,7 @@ angular.module('FileModule').controller('ListController', ['$scope', '$rootScope
 	$scope.file = file;
 
 	$scope.syncFile = function(file, isLink) {
-		FSystem.r.syncPublic({ FSystemId: file.id }, { link: isLink }, function(data) {
-			console.log('YEY SYNCD', data);
-		});
+		FSystem.r.syncPublic({ FSystemId: file.id }, { link: isLink });
 	};
 
 	$scope.cancel = function () {

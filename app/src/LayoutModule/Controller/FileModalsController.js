@@ -8,7 +8,6 @@ angular.module('LayoutModule')
             breadcrumb = '';
         }
 
-        console.debug($rootScope.breadcrumb);
 		FSystem.r.createFolder({}, { filename: breadcrumb + '/' + foldername }, function(data) {
 			$rootScope.$emit('FSystem.fileAdd', data.folder);
 			$modalInstance.close();
@@ -34,13 +33,11 @@ angular.module('LayoutModule')
 			FileTransfer.files.push(progress);
 
 		transfer.then(function(data){
-			console.log(progress);
 			$rootScope.$emit('FSystem.fileAdd', progress.model);
 		})
 	};
 
 	$scope.cancel = function () {
-		console.log($rootScope.breadcrumb);
 		$modalInstance.dismiss('cancel');
 	};
 

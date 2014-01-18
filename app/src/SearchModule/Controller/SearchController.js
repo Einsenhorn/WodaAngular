@@ -42,9 +42,8 @@ angular.module('SearchModule').controller('SearchController', ['$scope', '$locat
 			$scope.result.publicFiles = data.public_files;
 			$scope.result.publicFilesCount = data.public_files.length;
 
-			}, function(httpResponse) {
-				console.debug(httpResponse);
-		});
+			}
+        );
 	}
 
 	$scope.search = function(query) {

@@ -29,7 +29,6 @@ angular.module('UserModule').controller('ProfileController', ['$scope', '$routeP
     $scope.getDDL = function(fsystem) {
         FSystem.r.getDDL({ FSystemId: fsystem.id }, function(data) {
             console.debug(data.link);
-            //alert(data.link);
         });
     }
 }]);

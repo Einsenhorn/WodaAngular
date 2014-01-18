@@ -40,8 +40,6 @@ angular.module('FileModule').controller('PublicController', ['$scope', '$rootSco
 	$scope.getDDL = function(fsystem) {
 		FSystem.r.getDDL({ FSystemId: fsystem.id }, function(data) {
 			window.location = data.link;
-			console.debug(data.link);
-			//alert(data.link);
 		});
 	}
 }]);
