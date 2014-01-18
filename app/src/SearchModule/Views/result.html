@@ -1,6 +1,6 @@
 <div id="search-filters-container">
 	<div id="search-filters">
-		<a ng-click="switchRoot('private')" class="btn-searchfilter">MY FILES ({{result.privateFilesCount}})</a> 
+		<a ng-click="switchRoot('private')" class="btn-searchfilter">MY FILES ({{result.privateFilesCount}})</a>
 		<a ng-click="switchRoot('public')" class="btn-searchfilter">PUBLIC FILES ({{result.publicFilesCount}})</a>
 		<a ng-click="switchRoot('users')" class="btn-searchfilter">USERS ({{result.usersCount}})</a>
 	</div>
@@ -30,23 +30,3 @@
 		</div>
 	</div>
 </div>
-
-<!-- <div ng-show="error" class="error" style="border: 1px solid #F0F">{{error}}</div>
-	</div>
-
-	<div ng-show="filter == 'private'">
-		<pre>{{resultPrivateFiles}}</pre>
-	</div>
-
-
-	<div ng-show="filter == 'public'">
-		<pre>{{resultPublicFiles}}</pre>
-	</div>
-	<div ng-show="filter == 'users'">
-		<ul>
-			<li ng-repeat="user in resultUsers">
-				<a ng-href="#/profile/{{user.id}}">{{user.login}}</a>
-				<span user-manage-friend></span>
-			</li>
-		</ul>
-	</div> -->

@@ -472,10 +472,9 @@ table .icon-file {
 
 }
 
-#search-filters{
+#search-filters {
 	margin: 0 auto;
-	height: 50px;
-	width:465px;
+    text-align: center;
 }
 
 div#login {
