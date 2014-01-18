@@ -9,7 +9,7 @@
 		<i>Current upload folder : {{path}}</i>
 	</div>
 
-	<div id="content" ng-if="files">
+	<div id="content" ng-if="files.length != 0">
 		<table>
 			<thead>
 				<th>Filename</th>
@@ -24,10 +24,6 @@
 				</tr>
 			</tbody>
 		</table>
-	</div>
-
-	<div ng-if="files == {}">
-		No files uploaded.
 	</div>
 
 

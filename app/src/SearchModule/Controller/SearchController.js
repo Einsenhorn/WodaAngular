@@ -8,13 +8,13 @@ angular.module('SearchModule').controller('SearchController', ['$scope', '$locat
 	$scope.root.users = [];
 
 
-
 	$scope.showusers = false;
 
 	function setUpRootFolder(result) {
 		$scope.root.files = [];
 		$scope.root.folders = [];
 		$scope.root.users = [];
+
 		angular.forEach(result, function(value, key) {
 			if (value.hasOwnProperty('login'))
 				$scope.root.users.push(value);
@@ -22,7 +22,6 @@ angular.module('SearchModule').controller('SearchController', ['$scope', '$locat
 				$scope.root.folders.push(value);
 			else
 				$scope.root.files.push(value);
-
 		});
 	}
 

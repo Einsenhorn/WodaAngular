@@ -12,21 +12,24 @@
             <p>{{success}}</p>
         </div>
         <h3>This file is shared with :</h3>
-        <div id="content" ng-if="files != {}">
-        <table>
-            <thead>
-                <th>User</th>
-                <th></th>
-            </thead>
-            <tbody>
-                <tr ng-repeat="user in users">
-                    <td style="width:50%;">{{ user.login }}</td>
-                    
-                    <td style="width:50%;"><button class="btnclassic" ng-click="unshareFile(user)">Unshare</button></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+        <div id="content" ng-if="users.length > 0">
+            <table>
+                <thead>
+                    <th>User</th>
+                    <th></th>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="user in users">
+                        <td style="width:50%;">{{ user.login }}</td>
+                        
+                        <td style="width:50%;"><button class="btnclassic" ng-click="unshareFile(user)">Unshare</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div ng-if="users.length == 0">
+            File is not shared.
+        </div>
     </div>
 
     <div class="modal-footer">
