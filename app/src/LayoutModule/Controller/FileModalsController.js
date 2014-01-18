@@ -8,7 +8,6 @@ angular.module('LayoutModule')
             breadcrumb = '';
         }
 
-		//fonctionne a moitie / voir avec kevin comme creer un repertoire ailleur qu'a la racine
         console.debug($rootScope.breadcrumb);
 		FSystem.r.createFolder({}, { filename: breadcrumb + '/' + foldername }, function(data) {
 			$rootScope.$emit('FSystem.fileAdd', data.folder);
@@ -24,6 +23,7 @@ angular.module('LayoutModule')
 .controller('UploadModalController', ['$modalInstance', '$scope', 'FileTransfer', '$rootScope', function ($modalInstance, $scope, FileTransfer, $rootScope){
 
 	$scope.files = FileTransfer.files;
+	$scope.path = $rootScope.breadcrumb.substr(1);
 
 	$scope.startUpload = function(file) {
 		var progress = {};
@@ -40,6 +40,7 @@ angular.module('LayoutModule')
 	};
 
 	$scope.cancel = function () {
+		console.log($rootScope.breadcrumb);
 		$modalInstance.dismiss('cancel');
 	};
 
