@@ -11,7 +11,9 @@ angular.module('LayoutModule')
 		FSystem.r.createFolder({}, { filename: $scope.breadcrumb + foldername }, function(data) {
 			$rootScope.$emit('FSystem.fileAdd', data.folder);
 			$modalInstance.close();
-		})
+		}, function(result){
+			$scope.error = result.data.message;
+		});
 	}
 
 	$scope.cancel = function () {
