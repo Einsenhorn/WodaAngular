@@ -11,7 +11,7 @@ angular.module('FileModule').directive('fsystemBreadcrumb', ['$rootScope', '$rou
 					if (idx	> 1)
 						span.innerHTML += ' / ';
 					span.innerHTML += '<a ng-href="#/list/' + data.breadcrumb[idx].id + '" href="#/list/' + data.breadcrumb[idx].id + '">' + data.breadcrumb[idx].name + '</a>';
-                    $rootScope.breadcrumb = data.breadcrumb[idx].name + '/';
+                    $rootScope.breadcrumb += data.breadcrumb[idx].name + '/';
 					if (idx	== 0)
 						span.innerHTML += '  ';
 				}
