@@ -21,16 +21,11 @@ angular.module('FileModule').controller('ListController', ['$scope', '$rootScope
 	
 
 	$scope.$watch('$scope.root.isShared', function() {
-		if (!$scope.root.isShared || typeof $scope.root.isShared == 'undefined')
-		{
-				$scope.root.isShared = false;
-		}
-		else
-		{
+		if (!$scope.root.isShared || typeof $scope.root.isShared == 'undefined') {
+            $scope.root.isShared = false;
+		} else {
 			$scope.root.isShared = true;
 		}
-		console.log('hey');
-		console.log($scope.root.isShared);
 	});
 	
 
