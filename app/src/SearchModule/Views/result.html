@@ -10,7 +10,7 @@
 	<div id="content">
         <div ng-include="'app/src/FileModule/Views/table.html'" ng-if="!showusers"></div>
 		<div ng-if="showusers">
-			<table style="width:100%">
+			<table style="width:100%" ng-if="root.users">
 				<thead>
 				  <tr>
 					<th class="files">USERS</th>
@@ -24,6 +24,9 @@
 					</tr>
 				</tbody>
 			</table>
+			<div ng-if="root.users.length == 0">
+				No users.
+			</div>
 		</div>
 	</div>
 </div>
