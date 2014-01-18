@@ -105,9 +105,14 @@ angular.module('FileModule').controller('ListController', ['$scope', '$rootScope
 }])
 .controller('SyncFileModalController', ['$modalInstance', '$scope', 'FSystem', 'file', function ($modalInstance, $scope, FSystem, file){
 	$scope.file = file;
+    $scope.error = '';
 
 	$scope.syncFile = function(file, isLink) {
-		FSystem.r.syncPublic({ FSystemId: file.id }, { link: isLink });
+		FSystem.r.syncPublic({ FSystemId: file.id }, { link: isLink }, function(){
+            $modalInstance.dismiss('ok');
+        }, function (result) {
+            $scope.error = result.data.message;
+        });
 	};
 
 	$scope.cancel = function () {
@@ -209,7 +214,7 @@ controller('moveFSystemController', ['$modalInstance', '$scope', '$route', 'FSys
         if ($scope.parent && $scope.parent.hasOwnProperty('id')) {
             console.debug('move: ' + $scope.parent.name + '/' + f.name + ' into ' + $scope.folder.name);
             FSystem.r.move({ fileId: f.id, sourceId: $scope.parent.id, destinationId: $scope.folder.id }, {}, function() {
-                $route.reload();
+                // $route.reload();
                 $modalInstance.dismiss('ok');
             });
         }
