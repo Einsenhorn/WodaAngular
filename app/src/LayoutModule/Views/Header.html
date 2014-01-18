@@ -5,7 +5,7 @@
           <div id="logo"></div>
       </a>
       <div id="user" ng-controller="AccountController">
-        <span id="userName"><strong>{{User.login}}</strong></span> <i><br /> 
+        <a ng-href="#/profile"><span id="userName"><strong>{{User.login}}</strong></span><i></a><br />
         ({{User.used_space | Bytes:1}} of {{User.space | Bytes:1}} used)</i> <br />
         <span><a style="cursor:pointer" user-logout ng-href="">Logout</a></span>
       </div>
