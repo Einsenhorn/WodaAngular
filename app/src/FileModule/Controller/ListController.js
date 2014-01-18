@@ -1,4 +1,4 @@
-angular.module('FileModule').controller('ListController', ['$scope', '$rootScope', 'FSystem', '$modal', function($scope, $rootScope, FSystem, $modal) {
+angular.module('FileModule').controller('ListController', ['$scope', '$rootScope', 'FSystem', '$modal', '$location', function($scope, $rootScope, FSystem, $modal, $location) {
 
 	$scope.$watch('$scope.root.isPublic', function() {
 		if (!$scope.root.isPublic || typeof $scope.root.isPublic == 'undefined')
@@ -11,6 +11,16 @@ angular.module('FileModule').controller('ListController', ['$scope', '$rootScope
 		}
 	});
 
+    $scope.$watch('$scope.root.isShared', function() {
+        if (!$scope.root.isShared || typeof $scope.root.isShared == 'undefined') {
+            $scope.root.isShared = false;
+        } else {
+            $scope.root.isShared = true;
+        }
+    });
+
+    $scope.showMove = ($location.path() == '/' || $location.path().substr(0, 6) == '/list/');
+
 	$rootScope.$on('FSystem.fileAdd', function (event, file) {
 			if (file.folder)
 				$scope.root.folders.push(file);
@@ -18,16 +28,6 @@ angular.module('FileModule').controller('ListController', ['$scope', '$rootScope
 				$scope.root.files.push(file);
 		});
 
-	
-
-	$scope.$watch('$scope.root.isShared', function() {
-		if (!$scope.root.isShared || typeof $scope.root.isShared == 'undefined') {
-            $scope.root.isShared = false;
-		} else {
-			$scope.root.isShared = true;
-		}
-	});
-	
 	$scope.publicFSystem = function(fsystem) {
 		FSystem.r.public({ FSystemId: fsystem.id }, { public: (fsystem.public) ? 'false' : 'true' }, function(data) {
 			if (fsystem.hasOwnProperty("folder") && fsystem.folder === true) {
@@ -196,7 +196,7 @@ controller('moveFSystemController', ['$modalInstance', '$scope', '$route', 'FSys
     $scope.moveFSystem = function () {
         if ($scope.parent && $scope.parent.hasOwnProperty('id')) {
             FSystem.r.move({ fileId: f.id, sourceId: $scope.parent.id, destinationId: $scope.folder.id }, {}, function() {
-                $route.reload();
+                // $route.reload();
                 $modalInstance.dismiss('ok');
             });
         }
