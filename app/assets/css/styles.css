@@ -61,6 +61,8 @@ div#globalcontainer {
 	background-color: #ffffff;
 }
 
+
+
 div#header {
 	height:60px;
 	background-color: #eaeaea;
@@ -110,7 +112,7 @@ div#userMenu {
 	position:absolute;
 	right:0;
 	bottom:0;
-	margin-bottom: -106px; 
+	margin-bottom: -106px;
 	background-color: white;
 }
 
@@ -130,7 +132,7 @@ div#searchnstuff {
 }
 
 div#search {
-	width:569px;
+        width:569px;
 	float:left;
 	position: relative;
 	background-color: white;
@@ -258,7 +260,7 @@ table tr {
 
 table tbody tr:hover {
 	background-color: #eaeaea;
-} 
+}
 
 table td {
 	text-align:center;
@@ -492,7 +494,7 @@ div#login {
 	filter:alpha(opacity=87);
 	-moz-opacity:0.87;
 	opacity: 0.87;
-	box-shadow: 8px 8px 5px #999; 
+	box-shadow: 8px 8px 5px #999;
 }
 
 #login a {
@@ -516,6 +518,11 @@ div#login {
 div#uploadform {
 	width:100%;
 	text-align: center;
+        margin-bottom: 20px;
+}
+
+#uploadform button {
+    margin-left: 45px;
 }
 
 span.thin {
@@ -524,6 +531,6 @@ span.thin {
 }
 
 .text::-webkit-input-placeholder { font-size: 20px; }
-.text::-moz-placeholder { font-size: 20px; } 
+.text::-moz-placeholder { font-size: 20px; }
 .text:-ms-input-placeholder { font-size: 20px; }
 input .text:-moz-placeholder { font-size: 20px; }
