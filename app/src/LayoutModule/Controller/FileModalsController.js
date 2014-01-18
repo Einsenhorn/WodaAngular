@@ -1,14 +1,14 @@
 angular.module('LayoutModule')
 .controller('CreateFolderModalController', ['$scope', '$modalInstance', 'FSystem', '$rootScope', function ($scope, $modalInstance, FSystem, $rootScope){
 
+	$scope.breadcrumb = $rootScope.breadcrumb;
+
+    if ($scope.breadcrumb.substr(0, 2) == '//') {
+        $scope.breadcrumb = $scope.breadcrumb.substr(1);
+    }
+
 	$scope.createFolder = function(foldername) {
-        var breadcrumb = $rootScope.breadcrumb;
-
-        if (breadcrumb == '//') {
-            breadcrumb = '';
-        }
-
-		FSystem.r.createFolder({}, { filename: breadcrumb + '/' + foldername }, function(data) {
+		FSystem.r.createFolder({}, { filename: $scope.breadcrumb + foldername }, function(data) {
 			$rootScope.$emit('FSystem.fileAdd', data.folder);
 			$modalInstance.close();
 		})
