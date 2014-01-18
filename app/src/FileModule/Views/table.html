@@ -16,8 +16,8 @@
 		<tbody>
 		  <tr ng-repeat="folder in root.folders" ng-mouseenter="show = true" ng-mouseleave="show = false">
 		    <td class="files">
-		    	<i class="icon-folder"></i><a ng-href="#/list/{{folder.id}}">{{folder.name}}
-		    	<i style="font-size:14px" ng-show="file.owner"> (owned by <a ng-href="#/profile/{{file.owner.id}}">{{file.owner.login}}</a>)</i>
+		    	<i class="icon-folder"></i><a ng-href="#/list/{{folder.id}}">{{folder.name}}</a>
+		    	<i style="font-size:14px" ng-show="folder.owner"> (owned by <a ng-href="#/profile/{{folder.owner.id}}">{{folder.owner.login}}</a>)</i>
 		    </td>
 		    <td ng-show="show">
 		    	<i class="btn"></i>
@@ -37,9 +37,9 @@
 		    </td>
 		    <td>{{folder.last_update | date: 'short'}}</td>
 		    <td>
-		    	<a ng-if="(!root.isPublic && !file.owner) || root.isShared" ng-click="publicFSystem(file)"><i class="btn btn-public" ng-class="(file.public) ? 'active' : ''"></i></a>
-		    	<i ng-if="(root.isPublic || file.owner) && !root.isShared" class="btn"></i> 
-		    	<a ng-click="favoriteFSystem(file)"><i class="btn btn-fav" ng-class="(file.favorite) ? 'active' : ''"></i></a>
+		    	<a ng-if="(!root.isPublic && !file.owner) || root.isShared" ng-click="publicFSystem(folder)"><i class="btn btn-public" ng-class="(folder.public) ? 'active' : ''"></i></a>
+		    	<i ng-if="(root.isPublic || folder.owner) && !root.isShared" class="btn"></i> 
+		    	<a ng-click="favoriteFSystem(folder)"><i class="btn btn-fav" ng-class="(folder.favorite) ? 'active' : ''"></i></a>
 		    </td>
 		  </tr>
 
